@@ -20,7 +20,7 @@ public interface IProductDetails {
     Task<IEnumerable<ProductDetails>> GetAllProductDetailsByBrandId(Guid BrandId);
     Task<IEnumerable<ProductDetails>> GetAllProductDetailsByCategoryId(Guid BrandId);
 
-    // Fetching specific 
+    // Fetching specific details
     Task<ProductDetails> GetProductPhysicalAttributesById(Guid productId);
     Task<ProductDetails> GetWarrantyDetailsById(Guid warrantyId);
     Task<ProductDetails> GetProductPriceById(Guid productId);
