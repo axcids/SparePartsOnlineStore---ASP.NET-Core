@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 namespace Spareparts.Infrastructure.Persistence; 
 public class SparepartsDbContext : DbContext{
 
-    internal DbSet<ProductDetails> ProductDetails { get; set; }
+    internal DbSet<ProductDetails> ProductsDetails { get; set; }
+    internal DbSet<Car> Cars{ get; set; }
+    internal DbSet<Category> categories { get; set; }
+    internal DbSet<Manufacturer> Manufacturers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);

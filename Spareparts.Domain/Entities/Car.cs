@@ -4,7 +4,7 @@ public class Car {
     public Guid Id { get; set; }
 
     // General car information
-    public String Manufacturer { get; set; }  // e.g., Toyota, Honda
+    public Guid Manufacturer { get; set; }
     public string Model { get; set; }         // e.g., Corolla, Civic
     public int ModelYear { get; set; }        // e.g., 2020, 2021
 

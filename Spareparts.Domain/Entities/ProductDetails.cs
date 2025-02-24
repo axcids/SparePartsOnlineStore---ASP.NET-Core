@@ -35,6 +35,7 @@ public class ProductDetails {
     // Timestamps for tracking product creation or last update
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+
 }
 
 

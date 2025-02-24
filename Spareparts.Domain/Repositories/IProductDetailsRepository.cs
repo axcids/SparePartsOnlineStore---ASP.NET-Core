@@ -2,25 +2,26 @@
 using System.Threading.Tasks;
 
 namespace Spareparts.Domain.Repositories; 
-public interface IProductDetails {
+public interface IProductDetailsRepository {
 
     // Add new product details 
     Task<Guid> AddNewProductDetails(ProductDetails entity);
 
     // Delete product details 
-    Task DeleteProductById(Guid productId);
+    Task<bool>DeleteProductById(Guid productId);
 
     // Update product detials
 
 
-    // Fetching all details
-    Task<ProductDetails> GetAllProductDetailsByProductId(Guid productId);
+    // Fetching all products
+    Task<IEnumerable<ProductDetails>> GetAllProductsDetails();
     Task<IEnumerable<ProductDetails>> GetAllProductDetailsByName(String Name);
     Task<IEnumerable<ProductDetails>> GetAllProductDetailsByUPC(String UPC);
     Task<IEnumerable<ProductDetails>> GetAllProductDetailsByBrandId(Guid BrandId);
     Task<IEnumerable<ProductDetails>> GetAllProductDetailsByCategoryId(Guid BrandId);
 
     // Fetching specific details
+    Task<ProductDetails> GetAllProductDetailsByProductId(Guid productId);
     Task<ProductDetails> GetProductPhysicalAttributesById(Guid productId);
     Task<ProductDetails> GetWarrantyDetailsById(Guid warrantyId);
     Task<ProductDetails> GetProductPriceById(Guid productId);
