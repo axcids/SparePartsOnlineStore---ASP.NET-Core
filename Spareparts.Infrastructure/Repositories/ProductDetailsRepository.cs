@@ -10,54 +10,44 @@ internal class ProductDetailsRepository(SparepartsDbContext dbContext) : IProduc
     public async Task<Guid> AddNewProductDetails(Domain.Entities.ProductDetails entity) {
         dbContext.Add(entity);
         await dbContext.SaveChangesAsync();
-        return entity.Id;
-    }
-
-    public Task<IEnumerable<ProductDetails>> GetAllProductsDetails() {
-        throw new NotImplementedException();
+        return entity.Id; //this might be error 
     }
     public async Task<bool> DeleteProductById(Guid productId) {
         var entity = dbContext.ProductsDetails
             .FirstOrDefault(x => x.Id == productId);
-        dbContext.Remove(entity.Id);
+        dbContext.Remove(entity);
         await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductDetailsByBrandId(Guid BrandId) {
-        throw new NotImplementedException();
+
+    public async Task<IEnumerable<ProductDetails>> GetAllProducts() {
+        var AllProductDetails = dbContext.ProductsDetails.ToList();
+        return AllProductDetails;
     }
 
-    public Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductDetailsByCategoryId(Guid BrandId) {
-        throw new NotImplementedException();
+    public async Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductsByBrandId(Guid BrandId) {
+        var AllProductsDetails = dbContext.ProductsDetails.Where(x => x.BrandId == BrandId);
+        return AllProductsDetails.ToList();
     }
 
-    public Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductDetailsByName(string Name) {
-        throw new NotImplementedException();
+    public async Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductsByCategoryId(Guid CategoryId) {
+        var AllProductsDetails = dbContext.ProductsDetails.Where(x => x.CategoryId == CategoryId);
+        return AllProductsDetails.ToList();
     }
 
-    public Task<Domain.Entities.ProductDetails> GetAllProductDetailsByProductId(Guid productId) {
-        throw new NotImplementedException();
+    public async Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductsByName(string Name) {
+        var AllProductsDetails = dbContext.ProductsDetails.Where(x => x.Name.Contains(Name));
+        return AllProductsDetails.ToList();
     }
 
-    public Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductDetailsByUPC(string UPC) {
-        throw new NotImplementedException();
+    public async Task<Domain.Entities.ProductDetails> GetProductDetailsByProductId(Guid productId) {
+        var entity = dbContext.ProductsDetails.FirstOrDefault(x => x.Id == productId);
+        return entity;
     }
 
-
-    public Task<Domain.Entities.ProductDetails> GetProductPhysicalAttributesById(Guid productId) {
-        throw new NotImplementedException();
-    }
-
-    public Task<Domain.Entities.ProductDetails> GetProductPriceById(Guid productId) {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Domain.Entities.ProductDetails>> GetProductPriceByUPC(Guid UPC) {
-        throw new NotImplementedException();
-    }
-
-    public Task<Domain.Entities.ProductDetails> GetWarrantyDetailsById(Guid warrantyId) {
-        throw new NotImplementedException();
+    public async Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductsByUPC(string UPC) {
+        var Products = dbContext.ProductsDetails.Where(x => x.UPC == UPC);
+        return Products;
     }
 }

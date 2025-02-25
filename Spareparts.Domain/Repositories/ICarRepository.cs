@@ -8,19 +8,11 @@ public interface ICarRepository {
     Task<Guid> AddNewCar(ProductDetails entity);
     
     // Delete car 
-    Task DeleteCarById(Guid carId);
+    Task<bool> DeleteCar(Guid carId);
 
     // Update car
 
     // Fetching all cars 
-    Task<IEnumerable<ICarRepository>> GetAllcars();
-    Task<IEnumerable<ICarRepository>> GetAllcarsByManufacturer(String Manufacturer);
-    Task<IEnumerable<ICarRepository>> GetAllcarsByYear(int ModelYear);
-
-    // Fetching specific details
-    Task<IEnumerable<ICarRepository>> GetAllModelsByManufacturer(String Manufacturer);
-
-
-
+    Task<IEnumerable<Car>> GetAllcars();
 
 }

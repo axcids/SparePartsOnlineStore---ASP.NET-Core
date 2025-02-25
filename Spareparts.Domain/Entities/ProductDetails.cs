@@ -13,10 +13,12 @@ public class ProductDetails {
     public string UPC { get; set; }
 
     // GUID for the brand or manufacturer of the part (e.g., Bosch, Toyota)
-    public Guid BrandId { get; set; }
+    public Guid ManufacturerId { get; set; }
+    public virtual Manufacturer Manufacturer { get; set; }
 
     // GUID for the product category (e.g., Gear, EnginePart, BrakeSystem)
     public Guid CategoryId { get; set; }
+    public virtual Category Category { get; set; }
 
     // Monetary cost of the product
     public decimal Price { get; set; }

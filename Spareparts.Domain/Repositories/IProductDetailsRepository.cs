@@ -13,19 +13,14 @@ public interface IProductDetailsRepository {
     // Update product detials
 
 
-    // Fetching all products
-    Task<IEnumerable<ProductDetails>> GetAllProductsDetails();
-    Task<IEnumerable<ProductDetails>> GetAllProductDetailsByName(String Name);
-    Task<IEnumerable<ProductDetails>> GetAllProductDetailsByUPC(String UPC);
-    Task<IEnumerable<ProductDetails>> GetAllProductDetailsByBrandId(Guid BrandId);
-    Task<IEnumerable<ProductDetails>> GetAllProductDetailsByCategoryId(Guid BrandId);
+    // Fetching all products by :
+    Task<IEnumerable<ProductDetails>> GetAllProducts();
+    Task<IEnumerable<ProductDetails>> GetAllProductsByName(String Name);
+    Task<IEnumerable<ProductDetails>> GetAllProductsByUPC(String UPC);
+    Task<IEnumerable<ProductDetails>> GetAllProductsByBrandId(Guid ManufacturerId);
+    Task<IEnumerable<ProductDetails>> GetAllProductsByCategoryId(Guid CategoryDetails);
 
     // Fetching specific details
-    Task<ProductDetails> GetAllProductDetailsByProductId(Guid productId);
-    Task<ProductDetails> GetProductPhysicalAttributesById(Guid productId);
-    Task<ProductDetails> GetWarrantyDetailsById(Guid warrantyId);
-    Task<ProductDetails> GetProductPriceById(Guid productId);
-    Task<IEnumerable<ProductDetails>> GetProductPriceByUPC(Guid UPC);
-
+    Task<ProductDetails> GetProductDetailsByProductId(Guid productId);
 
 }
