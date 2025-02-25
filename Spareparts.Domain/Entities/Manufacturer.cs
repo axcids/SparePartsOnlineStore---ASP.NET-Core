@@ -12,4 +12,8 @@ public class Manufacturer {
     // Timestamps for auditing
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+
+    // Accessible Properties
+    public virtual List<ProductDetails> ProductsDetails { get; set; }
+    public virtual List<Car> Cars { get; set; }
 }

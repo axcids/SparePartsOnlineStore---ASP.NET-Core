@@ -14,7 +14,7 @@ public class ProductDetails {
 
     // GUID for the brand or manufacturer of the part (e.g., Bosch, Toyota)
     public Guid ManufacturerId { get; set; }
-    public virtual Manufacturer Manufacturer { get; set; }
+    public virtual Manufacturer Manufacturers { get; set; }
 
     // GUID for the product category (e.g., Gear, EnginePart, BrakeSystem)
     public Guid CategoryId { get; set; }

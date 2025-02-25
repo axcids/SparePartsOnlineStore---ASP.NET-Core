@@ -1,6 +1,14 @@
 //Create builder
+using Spareparts.API.Extensions;
+using Spareparts.Application;
+using Spareparts.Infrastructure.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 //Add Builders Extensions 
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.AddPresentation();
+
+
 
 
 builder.Services.AddControllers();

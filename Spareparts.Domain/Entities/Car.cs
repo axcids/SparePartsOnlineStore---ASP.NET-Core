@@ -4,7 +4,8 @@ public class Car {
     public Guid Id { get; set; }
 
     // General car information
-    public Guid Manufacturer { get; set; }
+    public Guid ManufacturerId { get; set; }
+    public virtual Manufacturer Manufacturers { get; set; }
     public string Model { get; set; }         // e.g., Corolla, Civic
     public int ModelYear { get; set; }        // e.g., 2020, 2021
 
@@ -17,4 +18,5 @@ public class Car {
     // Timestamps for creation and updates
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+
 }

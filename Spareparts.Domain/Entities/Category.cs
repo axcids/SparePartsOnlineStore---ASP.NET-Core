@@ -15,4 +15,7 @@ public class Category {
     // Timestamps for auditing
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+
+    // Accessible Properties
+    public virtual List<ProductDetails> ProductsDetails { get; set; }
 }

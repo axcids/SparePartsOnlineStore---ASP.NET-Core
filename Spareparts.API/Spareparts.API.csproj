@@ -19,6 +19,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Spareparts.Application\Spareparts.Application.csproj" />
+    <ProjectReference Include="..\Spareparts.Infrastructure\Spareparts.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

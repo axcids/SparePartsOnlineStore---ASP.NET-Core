@@ -16,7 +16,7 @@ namespace Spareparts.Infrastructure.Extensions {
 
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration) {
 
-            var connectionString = configuration.GetConnectionString("HomeConnection");
+            var connectionString = configuration.GetConnectionString("OfficeConnection");
             services.AddDbContext<SparepartsDbContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
 
             //Add Scoped Repositories down here ....

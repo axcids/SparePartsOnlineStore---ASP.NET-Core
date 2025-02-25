@@ -22,6 +22,10 @@ public static class WebApplicationBuilderExtensions {
             builder.Services.AddAuthorization();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddAuthentication();   
+
+
+
+
         });
     }
 }
