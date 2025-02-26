@@ -5,8 +5,8 @@ namespace Spareparts.Domain.Repositories;
 public interface ICarRepository {
 
     // Add new car 
-    Task<Guid> AddNewCar(ProductDetails entity);
-    
+    Task<Guid> AddNewCar(Car car);
+
     // Delete car 
     Task<bool> DeleteCar(Guid carId);
 

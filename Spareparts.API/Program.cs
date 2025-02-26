@@ -1,14 +1,16 @@
-//Create builder
 using Microsoft.Identity.Client;
 using Spareparts.API.Extensions;
 using Spareparts.Application;
 using Spareparts.Infrastructure.Extensions;
 using Spareparts.Infrastructure.Seeders;
+using Spareparts.Application.Extensions;
 
+//Create builder
 var builder = WebApplication.CreateBuilder(args);
 //Add Builders Extensions 
-builder.Services.AddInfrastructure(builder.Configuration);
 builder.AddPresentation();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 
 

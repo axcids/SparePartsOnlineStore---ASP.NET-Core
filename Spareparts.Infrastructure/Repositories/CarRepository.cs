@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Spareparts.Infrastructure.Repositories;
 internal class CarRepository(SparepartsDbContext dbContext) : ICarRepository {
-    public async Task<Guid> AddNewCar(ProductDetails entity) {
+    public async Task<Guid> AddNewCar(Car entity) {
         dbContext.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity.Id; // This might be error 
