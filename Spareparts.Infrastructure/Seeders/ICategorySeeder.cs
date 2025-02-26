@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Spareparts.Infrastructure.Seeders {
-    internal interface ICategorySeeder {
-    }
+﻿namespace Spareparts.Infrastructure.Seeders; 
+public interface ICategorySeeder {
+    Task Seed();
 }

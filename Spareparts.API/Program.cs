@@ -1,7 +1,9 @@
 //Create builder
+using Microsoft.Identity.Client;
 using Spareparts.API.Extensions;
 using Spareparts.Application;
 using Spareparts.Infrastructure.Extensions;
+using Spareparts.Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add Builders Extensions 
@@ -14,6 +16,8 @@ builder.AddPresentation();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication();
+
 
 //Read from the appsettings file
 var ConnectionString = builder.Configuration.GetConnectionString("OfficeConnection");
@@ -30,8 +34,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Seeding data using a sccoped service 
+using (var scope = app.Services.CreateScope()) {
+    var CategoySeeder = scope.ServiceProvider.GetRequiredService<ICategorySeeder>();
+    var ManufacturerSeeder = scope.ServiceProvider.GetRequiredService<IManufacturerSeeder>();
+
+    // Adding the seeders 
+    await CategoySeeder.Seed();
+    await ManufacturerSeeder.Seed();
+}
+
 //Middlewares
-app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseAuthentication();
 app.MapControllers();
+app.UseHttpsRedirection();
 app.Run();

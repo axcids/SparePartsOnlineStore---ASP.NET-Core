@@ -60,7 +60,7 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.HasIndex(new[] { "ManufacturerId" }, "IX_Car_ManufacturerId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("Spareparts.Domain.Entities.Category", b =>
@@ -84,7 +84,7 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("categories");
+                    b.ToTable("categories", (string)null);
                 });
 
             modelBuilder.Entity("Spareparts.Domain.Entities.Manufacturer", b =>
@@ -105,7 +105,7 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers");
+                    b.ToTable("Manufacturers", (string)null);
                 });
 
             modelBuilder.Entity("Spareparts.Domain.Entities.ProductDetails", b =>
@@ -165,7 +165,7 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.HasIndex(new[] { "ManufacturerId" }, "IX_ProductDetails_ManufacturerId");
 
-                    b.ToTable("ProductsDetails");
+                    b.ToTable("ProductsDetails", (string)null);
                 });
 
             modelBuilder.Entity("Spareparts.Domain.Entities.Car", b =>
