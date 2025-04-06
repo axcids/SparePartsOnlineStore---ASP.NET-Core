@@ -8,11 +8,19 @@ public interface ICarRepository {
     Task<Guid> AddNewCar(Car car);
 
     // Delete car 
-    Task<bool> DeleteCar(Guid carId);
+    Task<bool> DeleteCarById(Guid carId);
+    Task<bool> DeleteCarsByManufacturerId(Guid carId);
 
     // Update car
 
     // Fetching all cars 
     Task<IEnumerable<Car>> GetAllcars();
+
+    //Fetch Cars by specific data
+    Task<Car> GetCarById(Guid carId);
+    Task<IEnumerable<Car>> GetCarsByManufacturerId(Guid manfacturerId);
+
+    // Saving Changes 
+    Task SaveChanges();
 
 }

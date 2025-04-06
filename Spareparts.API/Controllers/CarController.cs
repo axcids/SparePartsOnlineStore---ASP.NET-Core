@@ -1,17 +1,19 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Cars.Commands.CreateCar;
+using Spareparts.Application.Cars.Commands.DeleteCar;
 using Spareparts.Application.Cars.Queries.GetAllCars;
+using System.Data;
 
 namespace Spareparts.API.Controllers; 
 [ApiController]
 [Route("api/car/")]
-public class CarController(IMediator medator) : Controller {
+public class CarController(IMediator meditor) : Controller {
     #region POST 
     [HttpPost]
     [Route("AddNewCar")]
     public async Task<IActionResult> AddNewCar([FromBody] CreateCarCommand command) {
-        var id = await medator.Send(command);
+        var id = await meditor.Send(command);
         if(id != default(Guid)) return Ok(id);
         return null;
     }
@@ -22,7 +24,7 @@ public class CarController(IMediator medator) : Controller {
     [HttpGet]
     [Route("GetAllCars")]
     public async Task<IActionResult> GetAllCars() {
-        var allCars = await medator.Send(new GetAllCarsQuery());
+        var allCars = await meditor.Send(new GetAllCarsQuery());
         return Ok(allCars);
     }
     [HttpGet]
@@ -43,13 +45,25 @@ public class CarController(IMediator medator) : Controller {
     #region DELETE
     [HttpDelete]
     [Route("DeleteCarsById")]
-    public async Task<IActionResult> DeleteCarsById() {
-        throw new NotImplementedException();
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteCarsById(Guid id) {
+        var isDeleted = await meditor.Send(new DeleteCarCommand(id) {
+            Id = id
+        });
+        if (isDeleted) return Ok();
+        return NotFound();
+
     }
     [HttpDelete]
     [Route("DeleteCarsByManufacturerId")]
-    public async Task<IActionResult> DeleteCarsByManufacturerId() {
-        throw new NotImplementedException();
+    public async Task<IActionResult> DeleteCarsByManufacturerId(Guid id) {
+        var isDeleted = await meditor.Send(new DeleteCarsByManufacturerIdCommand(id) {
+            Id= id
+        });
+        if(isDeleted) return Ok();
+        return NotFound();
     }
+
     #endregion
 }

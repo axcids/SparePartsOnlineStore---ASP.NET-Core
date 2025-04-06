@@ -8,12 +8,13 @@ public class Manufacturer {
 
     // Official name of the manufacturer (e.g., "Toyota", "Bosch", etc.)
     public string Name { get; set; }
+    public string? Description { get; set; }
+    public string? Logo { get; set; }
 
     // Timestamps for auditing
-    public DateTime CreatedDate { get; set; }
-    public DateTime UpdatedDate { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt { get; set; }
 
     // Accessible Properties
-    public virtual List<ProductDetails> ProductsDetails { get; set; }
     public virtual List<Car> Cars { get; set; }
 }

@@ -14,7 +14,7 @@ public class CreateCarCommandHandler(ICarRepository carRepository, ILogger<Creat
             BodyStyle = request.BodyStyle,
             TransmissionType = request.TransmissionType,
             FuelType = request.FuelType,
-            UpdatedDate = DateTime.Now,
+            UpdatedAt = null,
         };
         var id = await carRepository.AddNewCar(car);
         return id;

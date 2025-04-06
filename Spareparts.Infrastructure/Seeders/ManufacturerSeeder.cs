@@ -16,13 +16,13 @@ internal class ManufacturerSeeder(SparepartsDbContext dbContext) : IManufacturer
         List<Manufacturer> manfacturers = [
                 new(){
                     Name = "BMW Group",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = null,
                 },
                 new(){
                     Name = "Mercedes-Benz",
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = null,
                 }
                
         ];

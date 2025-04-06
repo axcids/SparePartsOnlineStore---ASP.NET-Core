@@ -26,11 +26,6 @@ internal class ProductDetailsRepository(SparepartsDbContext dbContext) : IProduc
         return AllProductDetails;
     }
 
-    public async Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductsByBrandId(Guid ManufacturerId) {
-        var AllProductsDetails = dbContext.ProductsDetails.Where(x => x.ManufacturerId == ManufacturerId);
-        return AllProductsDetails.ToList();
-    }
-
     public async Task<IEnumerable<Domain.Entities.ProductDetails>> GetAllProductsByCategoryId(Guid CategoryId) {
         var AllProductsDetails = dbContext.ProductsDetails.Where(x => x.CategoryId == CategoryId);
         return AllProductsDetails.ToList();

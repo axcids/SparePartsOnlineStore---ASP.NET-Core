@@ -17,7 +17,6 @@ public interface IProductDetailsRepository {
     Task<IEnumerable<ProductDetails>> GetAllProducts();
     Task<IEnumerable<ProductDetails>> GetAllProductsByName(String Name);
     Task<IEnumerable<ProductDetails>> GetAllProductsByUPC(String UPC);
-    Task<IEnumerable<ProductDetails>> GetAllProductsByBrandId(Guid ManufacturerId);
     Task<IEnumerable<ProductDetails>> GetAllProductsByCategoryId(Guid CategoryDetails);
 
     // Fetching specific details

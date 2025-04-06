@@ -20,14 +20,14 @@ internal class CategorySeeder(SparepartsDbContext dbContext) : ICategorySeeder {
             new(){
                 Name = "Engine",
                 Description = "",
-                CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = null,
             },
             new(){
                 Name = "Break",
                 Description = "",
-                CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = null,
 
             }
         ];   

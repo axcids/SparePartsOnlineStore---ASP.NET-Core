@@ -16,7 +16,11 @@ public class Car {
     public string? FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, Hybrid
 
     // Timestamps for creation and updates
-    public DateTime CreatedDate { get; set; } = DateTime.Now;
-    public DateTime UpdatedDate { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt { get; set; }
+
+    // Relations
+    public virtual ICollection<CarProduct> CarsProducts { get; set; }
+
 
 }

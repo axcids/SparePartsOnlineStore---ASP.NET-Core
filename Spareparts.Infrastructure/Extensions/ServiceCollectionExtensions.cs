@@ -25,6 +25,8 @@ namespace Spareparts.Infrastructure.Extensions {
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+            services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddScoped<ICarProductRepository, CarProductRepository>();
 
             //Add Scoped Seeders ....
             services.AddScoped<ICategorySeeder, CategorySeeder>();

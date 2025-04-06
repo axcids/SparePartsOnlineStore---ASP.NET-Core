@@ -13,8 +13,8 @@ public class Category {
     public string? Description { get; set; }
 
     // Timestamps for auditing
-    public DateTime CreatedDate { get; set; }
-    public DateTime UpdatedDate { get; set; }
+    public DateTime CreatedAt{ get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt{ get; set; }
 
     // Accessible Properties
     public virtual List<ProductDetails> ProductsDetails { get; set; }
