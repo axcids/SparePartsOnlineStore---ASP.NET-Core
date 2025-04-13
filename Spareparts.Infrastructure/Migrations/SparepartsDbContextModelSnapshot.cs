@@ -169,9 +169,6 @@ namespace Spareparts.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
 
-                    b.Property<Guid>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("UPC")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -189,8 +186,6 @@ namespace Spareparts.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex(new[] { "CategoryId" }, "IX_ProductDetails_CategoryId");
-
-                    b.HasIndex(new[] { "SupplierId" }, "IX_ProductDetails_SupplierId");
 
                     b.ToTable("ProductsDetails");
                 });
@@ -325,12 +320,6 @@ namespace Spareparts.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Spareparts.Domain.Entities.Supplier", null)
-                        .WithMany("ProductDetails")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
                 });
 
@@ -377,8 +366,6 @@ namespace Spareparts.Infrastructure.Migrations
 
             modelBuilder.Entity("Spareparts.Domain.Entities.Supplier", b =>
                 {
-                    b.Navigation("ProductDetails");
-
                     b.Navigation("SupplierProducts");
                 });
 #pragma warning restore 612, 618

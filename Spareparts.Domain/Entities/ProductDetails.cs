@@ -12,7 +12,7 @@ public class ProductDetails {
     // GUID for the product category (e.g., Gear, EnginePart, BrakeSystem)
     public Guid CategoryId { get; set; }
     // GUID fpr the product supplier 
-    public Guid SupplierId { get; set; }
+    //public Guid SupplierId { get; set; }
     // Monetary cost of the product
     public decimal Price { get; set; }
 

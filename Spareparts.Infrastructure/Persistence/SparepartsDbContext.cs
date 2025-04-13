@@ -30,14 +30,14 @@ public class SparepartsDbContext : DbContext{
             // Create a non-unique index on ManufacturerId
             // Create a non-unique index on CategoryId
             entity.HasIndex(e => e.CategoryId, "IX_ProductDetails_CategoryId").IsUnique(false);
-            entity.HasIndex(e => e.SupplierId, "IX_ProductDetails_SupplierId").IsUnique(false);
+            //entity.HasIndex(e => e.SupplierId, "IX_ProductDetails_SupplierId").IsUnique(false);
 
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.Name).IsRequired();                       // Name cannot be NULL
             entity.Property(e => e.Description).IsRequired();                // Description cannot be NULL
             entity.Property(e => e.UPC).IsRequired();                        // UPC cannot be NULL
             entity.Property(e => e.CategoryId).IsRequired();                 // CategoryId cannot be NULL
-            entity.Property(e => e.SupplierId).IsRequired();                 // SupplierIdcannot be NULL
+            //entity.Property(e => e.SupplierId).IsRequired();                 // SupplierIdcannot be NULL
             entity.Property(e => e.Price).IsRequired();                      // Price cannot be NULL
             entity.Property(e => e.WeightInKg).IsRequired();                 // WeightInKg cannot be NULL
             entity.Property(e => e.Dimensions).IsRequired();                 // Dimensions cannot be NULL
@@ -81,10 +81,6 @@ public class SparepartsDbContext : DbContext{
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.Name).IsRequired();  // Name cannot be NULL 
         });
-        modelBuilder.Entity<Supplier>(entity => {
-            // ----- Required/Non-Nullable Properties 
-            entity.Property(e => e.Id).IsRequired();
-        });
         modelBuilder.Entity<CarProduct>(entity => {
             // ----- Indexes -----
             // Create a non-unique index on car id
@@ -125,8 +121,6 @@ public class SparepartsDbContext : DbContext{
             // ----- Relationships (Foreign Keys) -----
             entity.HasOne(x => x.Supplier).WithMany(p => p.SupplierProducts).HasForeignKey(x => x.SupplierId).OnDelete(DeleteBehavior.NoAction);
             entity.HasOne(x => x.ProductDetails).WithMany(p => p.SupplierProdouct).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.NoAction);
-
-
 
         });
         

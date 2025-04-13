@@ -5,7 +5,7 @@ public class ProductsDetailsDtos {
 
     public Guid Id { get; set; }
     public Guid CategoryId { get; set; } // Done
-    public Guid SupplierId { get; set; } // Not Done 
+    //public Guid SupplierId { get; set; } 
     public string Name { get; set; }
     public string Description { get; set; }
     public string UPC { get; set; }
@@ -21,7 +21,7 @@ public class ProductsDetailsDtos {
         return new ProductsDetailsDtos() {
             Id = productDetails.Id,
             CategoryId = productDetails.CategoryId,
-            SupplierId = productDetails.SupplierId,
+            //SupplierId = productDetails.SupplierId,
             Name = productDetails.Name,
             Description = productDetails.Description,
             UPC = productDetails.UPC,

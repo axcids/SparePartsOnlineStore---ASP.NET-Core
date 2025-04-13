@@ -13,7 +13,7 @@ namespace Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetail
         public async Task<Guid> Handle(CreateNewProductDetailsCommand request, CancellationToken cancellationToken) {
             var entity = new ProductDetails {
                 CategoryId = request.CategoryId,
-                SupplierId = request.SupplierId,
+                //SupplierId = request.SupplierId,
                 Name = request.Name,
                 Description = request.Description,
                 UPC = request.UPC,

@@ -26,7 +26,6 @@ public class Supplier {
     public DateTime? UpdatedAt{ get; set; }
 
     // Relations
-    public virtual ICollection<ProductDetails> ProductDetails { get; set; }
     public virtual ICollection<SupplierProduct> SupplierProducts { get; set; }
 
 

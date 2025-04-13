@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Spareparts.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class intial : Migration
+    public partial class INIT : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -70,6 +70,35 @@ namespace Spareparts.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductsDetails",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UPC = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    WeightInKg = table.Column<float>(type: "real", nullable: false),
+                    Dimensions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Material = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HasWarranty = table.Column<bool>(type: "bit", nullable: false),
+                    WarrantyPeriodInMonths = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductsDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductsDetails_categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cars",
                 columns: table => new
                 {
@@ -96,39 +125,26 @@ namespace Spareparts.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductsDetails",
+                name: "SupplierProduct",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UPC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    WeightInKg = table.Column<float>(type: "real", nullable: false),
-                    Dimensions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Material = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HasWarranty = table.Column<bool>(type: "bit", nullable: false),
-                    WarrantyPeriodInMonths = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductsDetails", x => x.Id);
+                    table.PrimaryKey("PK_SupplierProduct", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductsDetails_Suppliers_SupplierId",
+                        name: "FK_SupplierProduct_ProductsDetails_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "ProductsDetails",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SupplierProduct_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductsDetails_categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -156,29 +172,6 @@ namespace Spareparts.Infrastructure.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "SupplierProduct",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SupplierProduct", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SupplierProduct_ProductsDetails_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "ProductsDetails",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SupplierProduct_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Car_ManufacturerId",
                 table: "Cars",
@@ -198,11 +191,6 @@ namespace Spareparts.Infrastructure.Migrations
                 name: "IX_ProductDetails_CategoryId",
                 table: "ProductsDetails",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_SupplierId",
-                table: "ProductsDetails",
-                column: "SupplierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SupplierProduct_ProductDetails",
@@ -233,10 +221,10 @@ namespace Spareparts.Infrastructure.Migrations
                 name: "ProductsDetails");
 
             migrationBuilder.DropTable(
-                name: "Manufacturers");
+                name: "Suppliers");
 
             migrationBuilder.DropTable(
-                name: "Suppliers");
+                name: "Manufacturers");
 
             migrationBuilder.DropTable(
                 name: "categories");
