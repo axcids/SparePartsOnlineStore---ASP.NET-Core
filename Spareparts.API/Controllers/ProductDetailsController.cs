@@ -14,8 +14,8 @@ public class ProductDetailsController (IMediator mediator) : Controller {
     [Route("AddNewProduct")]
     public async Task<IActionResult> AddNewProduct([FromBody] CreateNewProductDetailsCommand productDetailsCommand) {
         var productId = await mediator.Send(productDetailsCommand);
-        // car id : dd1203bc-1810-4a88-0088-08dd7a8f1120
-        var carId = Guid.Parse("dd1203bc-1810-4a88-0088-08dd7a8f1120");
+        // car id : dd1203bc-1810-4a88-0088-08dd7a8f1120, a74602cb-4bae-4186-cdcf-08dd7ad707a0
+        var carId = Guid.Parse("a74602cb-4bae-4186-cdcf-08dd7ad707a0");
         // supplier id : cfaecd71-bf7c-4a70-b996-08dd7a8f36ec
         var supplierId = "0290b227-6c2c-41cb-93d6-5b130d3d416b";
         var carProductId = await mediator.Send(new CreateCarProductCommand(carId, productId));
