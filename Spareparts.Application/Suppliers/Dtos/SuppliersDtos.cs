@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
+﻿
+namespace Spareparts.Application.Suppliers.Dtos; 
+public class SuppliersDtos {
 
-namespace Spareparts.Domain.Entities; 
-
-public class Supplier {
-
-    public Guid Id { get; set; }
     public Guid UserId { get; set; } // To be implemented later 
     public string Name { get; set; }
     public string SupplierCode { get; set; } // To be auto generated later 
@@ -20,16 +16,5 @@ public class Supplier {
     public string StateOrProvince { get; set; }
     public string PostalCode { get; set; }
     public string Country { get; set; }
-
-    // Auditing fields
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? UpdatedAt{ get; set; }
-
-    // Relations
-    public virtual ICollection<ProductDetails> ProductDetails { get; set; }
-    public virtual ICollection<SupplierProduct> SupplierProducts { get; set; }
-
-
-
 
 }

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Spareparts.Domain\Spareparts.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Suppliers\Queries\" />
+  </ItemGroup>
+
 </Project>

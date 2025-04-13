@@ -7,7 +7,7 @@ using Spareparts.Domain.Entities;
 
 namespace Spareparts.Infrastructure.Repositories;
 internal class ProductDetailsRepository(SparepartsDbContext dbContext) : IProductDetailsRepository {
-    public async Task<Guid> AddNewProductDetails(Domain.Entities.ProductDetails entity) {
+    public async Task<Guid> AddNewProductDetails(ProductDetails entity) {
         dbContext.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity.Id; //this might be error 

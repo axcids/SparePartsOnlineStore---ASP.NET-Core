@@ -23,7 +23,8 @@ public class SparepartsDbContext : DbContext{
 
 
         // Configure the ProductDetails entity in the model
-        modelBuilder.Entity<ProductDetails>(entity => {
+        modelBuilder.Entity<ProductDetails>(entity =>
+        {
 
             // ----- Indexes -----
             // Create a non-unique index on ManufacturerId
@@ -45,12 +46,15 @@ public class SparepartsDbContext : DbContext{
             entity.Property(e => e.WarrantyPeriodInMonths).IsRequired();     // WarrantyPeriodInMonths cannot be NULL
 
             // Set property column type
-            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");  
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
             // ----- Relationships (Foreign Keys) -----
             // Many ProductDetails can reference the same Category
-            entity.HasOne(e => e.Category).WithMany(p => p.ProductsDetails).HasForeignKey(e => e.CategoryId).OnDelete(DeleteBehavior.Cascade); 
-
+            entity.HasOne(e => e.Category)
+                .WithMany(p => p.ProductsDetails)
+                .HasForeignKey(e => e.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
 
         // Configure the Car entity in the model
         modelBuilder.Entity<Car>(entity => {
@@ -109,8 +113,24 @@ public class SparepartsDbContext : DbContext{
             entity.Property(e => e.StateOrProvince).IsRequired();
             entity.Property(e => e.PostalCode).IsRequired();
             entity.Property(e => e.Country).IsRequired();
+           
+        });
+        modelBuilder.Entity<SupplierProduct>(entity => {
+            // ----- Indexes -----
+            entity.HasIndex(p => p.SupplierId, "IX_SupplierProduct_SupplierId").IsUnique();
+            entity.HasIndex(p => p.ProductId, "IX_SupplierProduct_ProductDetails").IsUnique();
+            // ----- Required/Non-Nullable Properties -----
+            entity.Property(y => y.SupplierId).IsRequired();
+            entity.Property(y => y.ProductId).IsRequired();
+            // ----- Relationships (Foreign Keys) -----
+            entity.HasOne(x => x.Supplier).WithMany(p => p.SupplierProducts).HasForeignKey(x => x.SupplierId).OnDelete(DeleteBehavior.NoAction);
+            entity.HasOne(x => x.ProductDetails).WithMany(p => p.SupplierProdouct).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.NoAction);
+
+
+
         });
         
+
 
     }
 }

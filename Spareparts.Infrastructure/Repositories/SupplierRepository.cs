@@ -6,7 +6,7 @@ using Spareparts.Infrastructure.Persistence;
 namespace Spareparts.Infrastructure.Repositories; 
 internal class SupplierRepository(SparepartsDbContext dbContext) :  ISupplierRepository {
 
-    public async Task<Guid> AddNewSupplier(Category entity) {
+    public async Task<Guid> AddNewSupplier(Supplier entity) {
         dbContext.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity.Id;
