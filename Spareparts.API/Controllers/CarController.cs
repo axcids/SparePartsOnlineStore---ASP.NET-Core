@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Cars.Commands.CreateCar;
 using Spareparts.Application.Cars.Commands.DeleteCar;
+using Spareparts.Application.Cars.Commands.UpdateCarNameCommand;
 using Spareparts.Application.Cars.Queries.GetAllCars;
+using Spareparts.Application.Cars.Queries.GetCarById;
+using Spareparts.Application.Cars.Queries.GetCarsByManufacturerId;
 using System.Data;
 
 namespace Spareparts.API.Controllers; 
@@ -18,28 +21,6 @@ public class CarController(IMediator meditor) : Controller {
         return null;
     }
 
-    #endregion
-
-    #region GET
-    [HttpGet]
-    [Route("GetAllCars")]
-    public async Task<IActionResult> GetAllCars() {
-        var allCars = await meditor.Send(new GetAllCarsQuery());
-        return Ok(allCars);
-    }
-    [HttpGet]
-    [Route("GetCarsByManufacturerId")]
-    public async Task<IActionResult> GetCarsByManufacturerId() {
-        throw new NotImplementedException();
-    }
-    #endregion
-    
-    #region UPDATE
-    [HttpPatch]
-    [Route("UpdateCarsById")]
-    public async Task<IActionResult> UpdateCarsById() {
-        throw new NotImplementedException();
-    }
     #endregion
 
     #region DELETE
@@ -59,11 +40,44 @@ public class CarController(IMediator meditor) : Controller {
     [Route("DeleteCarsByManufacturerId")]
     public async Task<IActionResult> DeleteCarsByManufacturerId(Guid id) {
         var isDeleted = await meditor.Send(new DeleteCarsByManufacturerIdCommand(id) {
-            Id= id
+            Id = id
         });
-        if(isDeleted) return Ok();
+        if (isDeleted) return Ok();
         return NotFound();
     }
 
     #endregion
+
+    #region GET
+    [HttpGet]
+    [Route("GetAllCars")]
+    public async Task<IActionResult> GetAllCars() {
+        var allCars = await meditor.Send(new GetAllCarsQuery());
+        return Ok(allCars);
+    }
+    [HttpGet]
+    [Route("GetCarById")]
+    public async Task<IActionResult> GetCarById(Guid id) {
+        var car = await meditor.Send(new GetCarByIdQuery(id));
+        if (car != null) return Ok(car);
+        return NotFound();
+    }
+    [HttpGet]
+    [Route("GetCarsByManufacturerId")]
+    public async Task<IActionResult> GetCarsByManufacturerId(Guid manufacturerId) {
+        var allCars = await meditor.Send(new GetCarsByManufacturerIdQuery(manufacturerId));
+        return Ok(allCars);
+    }
+    #endregion
+
+    #region UPDATE
+    [HttpPatch]
+    [Route("UpdateCarModelById")]
+    public async Task<IActionResult> UpdateCarModelById([FromBody] UpdateCarModelCommand command) {
+        var entity = await meditor.Send(command);
+        if (entity != null) return Ok(entity);
+        return NotFound();
+    }
+    #endregion
+
 }

@@ -20,6 +20,9 @@ public interface ICarRepository {
     Task<Car> GetCarById(Guid carId);
     Task<IEnumerable<Car>> GetCarsByManufacturerId(Guid manfacturerId);
 
+    // Update car name
+    Task<Car?> UpdateCarModel(Guid carId, string newModel);
+
     // Saving Changes 
     Task SaveChanges();
 
