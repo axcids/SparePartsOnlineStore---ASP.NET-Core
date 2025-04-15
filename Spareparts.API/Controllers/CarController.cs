@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Cars.Commands.CreateCar;
 using Spareparts.Application.Cars.Commands.DeleteCar;
+using Spareparts.Application.Cars.Commands.UpdateCarCommand;
 using Spareparts.Application.Cars.Commands.UpdateCarNameCommand;
 using Spareparts.Application.Cars.Queries.GetAllCars;
 using Spareparts.Application.Cars.Queries.GetCarById;
@@ -71,9 +72,18 @@ public class CarController(IMediator meditor) : Controller {
     #endregion
 
     #region UPDATE
+
+    [HttpPatch]
+    [Route("UpdateCarById")]
+    public async Task<IActionResult> UpdateCarById(Guid Id, [FromBody] UpdateCarCommand command) { //Change this from body to parameters 
+        command.Id = Id;
+        var entity = await meditor.Send(command);
+        if (entity != null) return Ok(entity);
+        return NotFound();
+    }
     [HttpPatch]
     [Route("UpdateCarModelById")]
-    public async Task<IActionResult> UpdateCarModelById([FromBody] UpdateCarModelCommand command) {
+    public async Task<IActionResult> UpdateCarModelById([FromBody] UpdateCarModelCommand command) { //Change this from body to parameters 
         var entity = await meditor.Send(command);
         if (entity != null) return Ok(entity);
         return NotFound();

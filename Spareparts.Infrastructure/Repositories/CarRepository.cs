@@ -56,9 +56,19 @@ internal class CarRepository(SparepartsDbContext dbContext) : ICarRepository {
         dbContext.Cars.Update(car);
         return car;
     }
-
-
-
+    public async Task<Car?> UpdateCarById(Guid carId, Car newCar) {
+        var car = await dbContext.Cars.FirstOrDefaultAsync(r => r.Id == carId);
+        if (car == null) return null;
+        car.ManufacturerId = newCar.ManufacturerId;
+        car.Model = newCar.Model;
+        car.ModelYear = newCar.ModelYear;
+        car.TrimLevel = newCar.TrimLevel;
+        car.BodyStyle = newCar.BodyStyle;
+        car.TransmissionType = newCar.TransmissionType;
+        car.FuelType = newCar.FuelType;
+        dbContext.Cars.Update(car);
+        return car;
+    }
 
     public async Task SaveChanges() {
         await dbContext.SaveChangesAsync();
