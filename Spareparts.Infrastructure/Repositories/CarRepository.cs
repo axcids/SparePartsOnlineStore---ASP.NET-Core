@@ -12,29 +12,6 @@ internal class CarRepository(SparepartsDbContext dbContext) : ICarRepository {
         await dbContext.SaveChangesAsync();
         return entity.Id; // This might be error 
     }
-
-    public async Task<bool> DeleteCarById(Guid carId) {
-        var entity = dbContext.Cars.FirstOrDefault(x => x.Id == carId);
-        dbContext.Cars.Remove(entity);
-        var isDeleted = await dbContext.SaveChangesAsync();
-        if(isDeleted == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public async Task<bool> DeleteCarsByManufacturerId(Guid manufacturerId) {
-         var cars = await GetCarsByManufacturerId(manufacturerId);
-        if (cars == null || !cars.Any()) {
-            // Return false if there were no cars to delete.
-            return false;
-        }
-        dbContext.Cars.RemoveRange(cars);
-        return true;
-
-    }
-
     public async Task<IEnumerable<Car>> GetAllcars() {
         var AllCars = dbContext.Cars.ToList();
         return AllCars;
@@ -69,7 +46,27 @@ internal class CarRepository(SparepartsDbContext dbContext) : ICarRepository {
         dbContext.Cars.Update(car);
         return car;
     }
+    public async Task<bool> DeleteCarById(Guid carId) {
+        var entity = dbContext.Cars.FirstOrDefault(x => x.Id == carId);
+        dbContext.Cars.Remove(entity);
+        var isDeleted = await dbContext.SaveChangesAsync();
+        if (isDeleted == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public async Task<bool> DeleteCarsByManufacturerId(Guid manufacturerId) {
+        var cars = await GetCarsByManufacturerId(manufacturerId);
+        if (cars == null || !cars.Any()) {
+            // Return false if there were no cars to delete.
+            return false;
+        }
+        dbContext.Cars.RemoveRange(cars);
+        return true;
 
+    }
     public async Task SaveChanges() {
         await dbContext.SaveChangesAsync();
     }
