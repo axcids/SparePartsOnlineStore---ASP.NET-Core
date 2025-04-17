@@ -16,27 +16,26 @@ internal class SupplierRepository(SparepartsDbContext dbContext) :  ISupplierRep
         var AllSuppliers = await dbContext.Suppliers.ToListAsync();
         return AllSuppliers;
     }
+    public async Task<Supplier> GetSupplierById(Guid id) {
+        var supplier = await dbContext.Suppliers.FirstOrDefaultAsync(x => x.Id == id);
+        return supplier;
+    }
     public async Task<IEnumerable<Supplier>> GetSuppliersBySupplierCode(string supplierCode) { 
         var suppliers = await dbContext.Suppliers.Where(x => x.SupplierCode == supplierCode).ToListAsync();
-        return suppliers;
-    }
-    public async Task<IEnumerable<Supplier>> GetSuppliersByCountry(string country) {
-        var suppliers = await dbContext.Suppliers.Where(x => x.Country == country).ToListAsync();
         return suppliers;
     }
     public async Task<Supplier> GetSupplierByName(string name) {
         var supplier = dbContext.Suppliers.FirstOrDefault(x => x.Name == name);
         return supplier;
     }
-    public async Task<IEnumerable<Guid>> GetUsersIdsBySupplierId(Guid id) {
-        var users = await dbContext.Suppliers.Where(x => x.Id == id).Select(x => x.UserId).ToListAsync();
-        return users;
+    public async Task<IEnumerable<Supplier>> GetSuppliersByCountry(string country) {
+        var suppliers = await dbContext.Suppliers.Where(x => x.Country == country).ToListAsync();
+        return suppliers;
     }
-
-    public async Task<bool> DeleteSupplier(Guid supplierId) {
+    public async Task<bool> DeleteSupplierById(Guid supplierId) {
         var entity = dbContext.Suppliers.FirstOrDefault(x => x.Id == supplierId);
         dbContext.Suppliers.Remove(entity);
-        var isDeleted = await dbContext.SaveChangesAsync();
+        var isDeleted = dbContext.SaveChanges();
         if (isDeleted == 1) {
             return true;
         }
@@ -44,6 +43,18 @@ internal class SupplierRepository(SparepartsDbContext dbContext) :  ISupplierRep
             return false;
         }
     }
+    public async Task<bool> DeleteSuppliersBySupplierCode(string supplierCode) {
+        var entities = dbContext.Suppliers.Where(x => x.SupplierCode == supplierCode).ToList();
+        dbContext.RemoveRange(entities);
+        var isDeleted = dbContext.SaveChanges();
+        if (isDeleted == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public async Task SaveChanges() {
         await dbContext.SaveChangesAsync();
     }

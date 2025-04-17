@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Spareparts.Application.Manufacturers.Dtos;
 using Spareparts.Domain.Repositories;
 
-namespace Spareparts.Application.Manufacturers.Queries;
+namespace Spareparts.Application.Manufacturers.Queries.GetAllManufacturer;
 public class GetAllManufacturersQueryHandler(IManufacturerRepository manufacturerRepository, ILogger<GetAllManufacturersQueryHandler> logger) : IRequestHandler<GetAllManufacturersQuery, IEnumerable<ManufacturersDtos>> {
     public async Task<IEnumerable<ManufacturersDtos>> Handle(GetAllManufacturersQuery request, CancellationToken cancellationToken) {
         var manufacturers = await manufacturerRepository.GetAllManufacturer();

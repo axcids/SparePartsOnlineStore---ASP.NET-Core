@@ -1,11 +1,13 @@
 ﻿using MediatR;
+using Spareparts.Application.Suppliers.Dtos;
 
-namespace Spareparts.Application.Suppliers.Commands; 
-public class CreateNewSupplierCommand : IRequest<Guid>{
-    public Guid UserId { get; set; } // To be implemented later 
+namespace Spareparts.Application.Suppliers.Queries.GetSupplierById; 
+public class GetSupplierByIdQuery (Guid id) : IRequest<SuppliersDtos>{
+    public Guid Id { get; set; } = id;
+    public Guid UserId { get; set; }
     public string Name { get; set; }
-    public string SupplierCode { get; set; } // To be auto generated later 
-    public string SupplierType { get; set; } // To be Enum list later 
+    public string SupplierCode { get; set; }
+    public string SupplierType { get; set; }
     public string ContactEmail { get; set; }
     public string ContactPhone { get; set; }
     public string? Website { get; set; }

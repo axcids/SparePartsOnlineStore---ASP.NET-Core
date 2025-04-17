@@ -19,6 +19,10 @@ public class SuppliersDtos {
     public string PostalCode { get; set; }
     public string Country { get; set; }
 
+    // Auditing fields
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
+
     public static SuppliersDtos? FromEntity(Supplier supplier) {
         if (supplier == null) return null;
         return new SuppliersDtos() {
@@ -35,7 +39,9 @@ public class SuppliersDtos {
             City = supplier.City,
             StateOrProvince = supplier.StateOrProvince,
             PostalCode = supplier.PostalCode,
-            Country = supplier.Country
+            Country = supplier.Country,
+            CreatedAt = supplier.CreatedAt,
+            UpdatedAt = supplier.UpdatedAt,
         };
     }
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Categories.Commands.CreateNewCategory;
 using Spareparts.Application.Manufacturers.Commands;
 using Spareparts.Application.Manufacturers.Queries;
+using Spareparts.Application.Manufacturers.Queries.GetAllManufacturer;
 
 namespace Spareparts.API.Controllers;
 [ApiController]

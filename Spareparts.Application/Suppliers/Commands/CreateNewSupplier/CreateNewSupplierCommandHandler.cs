@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Spareparts.Domain.Entities;
 using Spareparts.Domain.Repositories;
 
-namespace Spareparts.Application.Suppliers.Commands;
+namespace Spareparts.Application.Suppliers.Commands.CreateNewSupplier;
 public class CreateNewSupplierCommandHandler(ISupplierRepository supplierRepository, ILogger<CreateNewSupplierCommandHandler> logger) : IRequestHandler<CreateNewSupplierCommand, Guid> {
     public async Task<Guid> Handle(CreateNewSupplierCommand request, CancellationToken cancellationToken) {
         var entity = new Supplier {
