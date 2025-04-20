@@ -9,7 +9,7 @@ using Spareparts.Domain.Entities;
 using Spareparts.Domain.Repositories;
 
 namespace Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetails {
-    internal class CreateNewProductDetailsCommandHandler(IProductDetailsRepository productDetails, ILogger<CreateNewProductDetailsCommandHandler> logger) : IRequestHandler<CreateNewProductDetailsCommand, Guid> {
+    internal class CreateNewProductDetailsCommandHandler(IProductDetailsRepository productDetails, ICarProductRepository carsProduct, ISupplierProductRepository supplierProduct, ILogger<CreateNewProductDetailsCommandHandler> logger) : IRequestHandler<CreateNewProductDetailsCommand, Guid> {
         public async Task<Guid> Handle(CreateNewProductDetailsCommand request, CancellationToken cancellationToken) {
             var entity = new ProductDetails {
                 CategoryId = request.CategoryId,
@@ -25,6 +25,17 @@ namespace Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetail
                 WarrantyPeriodInMonths = request.WarrantyPeriodInMonths,
             };
             var id = await productDetails.AddNewProductDetails(entity);
+            var CarProductEntity = new CarProduct {
+                CarId = request.CarId,
+                ProductId = id,
+            };
+            var CarProductId = await carsProduct.AddNewCarProduct(CarProductEntity);
+            var suppliersProductEntity = new SupplierProduct {
+                SupplierId = request.SupplierId,
+                ProductId = id
+            };
+            // Repository 
+            var SupplierProductId = await supplierProduct.AddNewSupplierProduct(suppliersProductEntity);
             return id;
         }
     }

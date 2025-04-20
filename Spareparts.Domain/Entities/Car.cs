@@ -20,7 +20,7 @@ public class Car {
     public DateTime? UpdatedAt { get; set; }
 
     // Relations
-    public virtual ICollection<CarProduct> CarsProducts { get; set; }
+    public virtual ICollection<CarProduct> CarProducts { get; set; }
 
 
 }

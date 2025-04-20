@@ -92,9 +92,16 @@ public class SparepartsDbContext : DbContext{
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.ProductId).IsRequired();
             // ----- Relationships (Foreign Keys) -----
-            entity.HasOne(x => x.Car).WithMany(p => p.CarsProducts).HasForeignKey(b => b.CarId).OnDelete(DeleteBehavior.Restrict);
-            entity.HasOne(x => x.ProductDetails).WithMany(p => p.CarsProducts).HasForeignKey(b => b.ProductId).OnDelete(DeleteBehavior.Restrict);
-            
+            entity.HasOne(cp => cp.Car)
+           .WithMany(c => c.CarProducts)
+           .HasForeignKey(cp => cp.CarId)
+           .OnDelete(DeleteBehavior.Cascade); // Optional: or Restrict
+
+            entity.HasOne(cp => cp.ProductDetails)
+                  .WithMany(pd => pd.CarsProducts)
+                  .HasForeignKey(cp => cp.ProductId)
+                  .OnDelete(DeleteBehavior.Cascade); // Optional
+
         });
         modelBuilder.Entity<Supplier>(entity => {
             // ----- Required/Non-Nullable Properties -----
