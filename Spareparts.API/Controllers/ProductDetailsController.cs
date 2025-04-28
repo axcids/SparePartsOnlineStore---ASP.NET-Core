@@ -12,7 +12,7 @@ public class ProductDetailsController (IMediator mediator) : Controller {
     #region POST
     [HttpPost]
     [Route("AddNewProduct")]
-    public async Task<IActionResult> AddNewProduct([FromBody] CreateNewProductDetailsCommand productDetailsCommand, [FromQuery] Guid carId, [FromQuery] Guid supplierId) {
+    public async Task<IActionResult> AddNewProduct([FromBody] CreateNewProductDetailsCommand productDetailsCommand) {
         var productId = await mediator.Send(productDetailsCommand);
         if (productId != default(Guid)) return Ok(productId);
         return null;

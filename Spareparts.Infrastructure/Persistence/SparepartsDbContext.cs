@@ -120,8 +120,8 @@ public class SparepartsDbContext : DbContext{
         });
         modelBuilder.Entity<SupplierProduct>(entity => {
             // ----- Indexes -----
-            entity.HasIndex(p => p.SupplierId, "IX_SupplierProduct_SupplierId").IsUnique();
-            entity.HasIndex(p => p.ProductId, "IX_SupplierProduct_ProductDetails").IsUnique();
+            entity.HasIndex(p => p.SupplierId, "IX_SupplierProduct_SupplierId").IsUnique(false);
+            entity.HasIndex(p => p.ProductId, "IX_SupplierProduct_ProductDetails").IsUnique(false);
             // ----- Required/Non-Nullable Properties -----
             entity.Property(y => y.SupplierId).IsRequired();
             entity.Property(y => y.ProductId).IsRequired();

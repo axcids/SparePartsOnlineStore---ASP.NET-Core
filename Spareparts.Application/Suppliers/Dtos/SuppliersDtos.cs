@@ -4,6 +4,7 @@ using Spareparts.Domain.Entities;
 namespace Spareparts.Application.Suppliers.Dtos; 
 public class SuppliersDtos {
 
+    public Guid Id { get; set; }
     public Guid UserId { get; set; } // To be implemented later 
     public string Name { get; set; }
     public string SupplierCode { get; set; } // To be auto generated later 
@@ -26,6 +27,7 @@ public class SuppliersDtos {
     public static SuppliersDtos? FromEntity(Supplier supplier) {
         if (supplier == null) return null;
         return new SuppliersDtos() {
+            Id = supplier.Id,
             UserId = supplier.UserId,
             Name = supplier.Name,
             SupplierCode = supplier.SupplierCode,

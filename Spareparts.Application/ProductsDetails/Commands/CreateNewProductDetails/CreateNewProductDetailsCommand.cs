@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 namespace Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetails; 
-public class CreateNewProductDetailsCommand(Guid carId, Guid supplierId) : IRequest<Guid>{
+public class CreateNewProductDetailsCommand : IRequest<Guid>{
     public Guid CategoryId { get; set; }
     //public Guid SupplierId { get; set; }
     public string Name { get; set; }
@@ -15,9 +15,8 @@ public class CreateNewProductDetailsCommand(Guid carId, Guid supplierId) : IRequ
     public int? WarrantyPeriodInMonths { get; set; }
 
     // CarsProductTable 
-    public Guid CarId { get; } = carId; // CarId is the foreign key to the Cars table
+    public Guid CarId { get; set; }
     //SuppliersProduct Table 
-    public Guid SupplierId { get; } = supplierId; // SupplierId is the foreign key to the Suppliers table
-
+    public Guid SupplierId { get; set; }
 
 }
