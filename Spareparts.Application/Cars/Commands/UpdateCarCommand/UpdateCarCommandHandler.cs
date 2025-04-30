@@ -21,7 +21,6 @@ public class UpdateCarCommandHandler(ICarRepository carRepository, ILogger<Updat
                 FuelType = request.FuelType,
             };
             await carRepository.UpdateCarById(request.Id, newCar);
-            await carRepository.SaveChanges();
             var carDto = CarsDtos.FromEntity(newCar);
             return carDto;
         }else {

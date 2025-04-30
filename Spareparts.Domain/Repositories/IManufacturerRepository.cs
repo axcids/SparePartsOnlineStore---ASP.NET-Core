@@ -7,7 +7,7 @@ public interface IManufacturerRepository {
     Task<Guid> AddNewManufacturer(Manufacturer entity);
 
     // Delete manufacturer
-    Task<bool>DeleteManufacturer(Guid ManufacturerId);
+    Task<bool> DeleteManufacturerById(Guid ManufacturerId);
 
     // Update manufacturer
 

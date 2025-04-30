@@ -9,6 +9,7 @@ public interface ISupplierRepository {
     Task<IEnumerable<Supplier>> GetSuppliersBySupplierCode(string supplierCode);
     Task<Supplier> GetSupplierByName(string name);
     Task<IEnumerable<Supplier>> GetSuppliersByCountry(string country);
+    Task<bool> UpdateSupplierById(Guid id, Supplier entity);
     Task<bool> DeleteSupplierById(Guid Id);
     Task<bool> DeleteSuppliersBySupplierCode(string supplierCode);
     Task SaveChanges();

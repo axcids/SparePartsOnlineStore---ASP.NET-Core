@@ -8,12 +8,14 @@ public interface ICategoryRepository {
     Task<Guid> AddNewCategory(Category entity);
 
     // Delete a category
-    Task<bool> DeleteCategory(Guid CategoryId);
+    Task<bool> DeleteCategoryById(Guid CategoryId);
 
     // Update category
 
     // Fetching all category
     Task<IEnumerable<Category>> GetAllCategories();
+    Task<Category> GetCategoryById(Guid id);
+    Task<Category> UpdateCategorybyId(Guid Id, Category newCategory);
 
 
 

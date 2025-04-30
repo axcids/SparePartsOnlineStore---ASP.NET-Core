@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Categories.Commands.CreateNewCategory;
-using Spareparts.Application.Manufacturers.Commands;
+using Spareparts.Application.Manufacturers.Commands.CreateNewManufacturerCommand;
+using Spareparts.Application.Manufacturers.Commands.DeleteManufacturerByIdCommand;
 using Spareparts.Application.Manufacturers.Queries;
 using Spareparts.Application.Manufacturers.Queries.GetAllManufacturer;
 
@@ -25,5 +26,19 @@ public class ManufacturerController (IMediator mediator) : Controller {
         var allManufacturers = await mediator.Send(new GetAllManufacturersQuery());
         return Ok(allManufacturers);
     }
+    #endregion
+    #region DELETE
+    [HttpDelete]
+    [Route("DeleteManufacturerById")]
+    public async Task<IActionResult> DeleteManufacturerById([FromQuery] Guid id) {
+        var isDeleted = await mediator.Send(new DeleteManufacturerByIdCommand(id));
+        if (isDeleted) {
+            return Ok($"Manufacturer with ID {id} deleted successfully.");
+        }
+        else {
+            return NotFound($"Manufacturer with ID {id} not found.");
+        }
+    }
+
     #endregion
 }

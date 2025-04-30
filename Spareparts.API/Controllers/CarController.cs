@@ -24,31 +24,6 @@ public class CarController(IMediator meditor) : Controller {
 
     #endregion
 
-    #region DELETE
-    [HttpDelete]
-    [Route("DeleteCarsById")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteCarsById(Guid id) {
-        var isDeleted = await meditor.Send(new DeleteCarCommand(id) {
-            Id = id
-        });
-        if (isDeleted) return Ok();
-        return NotFound();
-
-    }
-    [HttpDelete]
-    [Route("DeleteCarsByManufacturerId")]
-    public async Task<IActionResult> DeleteCarsByManufacturerId(Guid id) {
-        var isDeleted = await meditor.Send(new DeleteCarsByManufacturerIdCommand(id) {
-            Id = id
-        });
-        if (isDeleted) return Ok();
-        return NotFound();
-    }
-
-    #endregion
-
     #region GET
     [HttpGet]
     [Route("GetAllCars")]
@@ -89,5 +64,31 @@ public class CarController(IMediator meditor) : Controller {
         return NotFound();
     }
     #endregion
+
+    #region DELETE
+    [HttpDelete]
+    [Route("DeleteCarsById")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteCarsById(Guid id) {
+        var isDeleted = await meditor.Send(new DeleteCarCommand(id) {
+            Id = id
+        });
+        if (isDeleted) return Ok();
+        return NotFound();
+
+    }
+    [HttpDelete]
+    [Route("DeleteCarsByManufacturerId")]
+    public async Task<IActionResult> DeleteCarsByManufacturerId(Guid id) {
+        var isDeleted = await meditor.Send(new DeleteCarsByManufacturerIdCommand(id) {
+            Id = id
+        });
+        if (isDeleted) return Ok();
+        return NotFound();
+    }
+
+    #endregion
+
 
 }
