@@ -13,4 +13,6 @@ public interface IManufacturerRepository {
 
     // Fetching all manufacturers
     Task<IEnumerable<Manufacturer>> GetAllManufacturer();
+    Task<Manufacturer> GetManufacturerById(Guid id);
+    Task<Manufacturer> UpdateManufacturerById(Guid Id, Manufacturer newManufacturer);
 }

@@ -11,6 +11,7 @@ using Spareparts.Domain.Repositories;
 namespace Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetails {
     internal class CreateNewProductDetailsCommandHandler(IProductDetailsRepository productDetails, ILogger<CreateNewProductDetailsCommandHandler> logger) : IRequestHandler<CreateNewProductDetailsCommand, Guid> {
         public async Task<Guid> Handle(CreateNewProductDetailsCommand request, CancellationToken cancellationToken) {
+          
             var entity = new ProductDetails {
                 CategoryId = request.CategoryId,
                 Name = request.Name,

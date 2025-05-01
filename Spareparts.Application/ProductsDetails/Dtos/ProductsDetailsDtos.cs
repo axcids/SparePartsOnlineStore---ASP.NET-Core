@@ -15,13 +15,15 @@ public class ProductsDetailsDtos {
     public string Material { get; set; }
     public Boolean HasWarranty { get; set; }
     public int? WarrantyPeriodInMonths { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? UpdatedAt { get; set; }
+
 
     public static ProductsDetailsDtos? FromEntity(ProductDetails productDetails) {
         if (productDetails == null) return null;
         return new ProductsDetailsDtos() {
             Id = productDetails.Id,
             CategoryId = productDetails.CategoryId,
-            //SupplierId = productDetails.SupplierId,
             Name = productDetails.Name,
             Description = productDetails.Description,
             UPC = productDetails.UPC,
@@ -30,7 +32,10 @@ public class ProductsDetailsDtos {
             Dimensions = productDetails.Dimensions,
             Material = productDetails.Material,
             HasWarranty = productDetails.HasWarranty,
-            WarrantyPeriodInMonths = productDetails.WarrantyPeriodInMonths
+            WarrantyPeriodInMonths = productDetails.WarrantyPeriodInMonths,
+            CreatedAt = productDetails.CreatedAt,
+            UpdatedAt = productDetails.UpdatedAt
+
         };
     }
 }

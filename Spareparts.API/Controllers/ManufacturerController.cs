@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Categories.Commands.CreateNewCategory;
 using Spareparts.Application.Manufacturers.Commands.CreateNewManufacturerCommand;
 using Spareparts.Application.Manufacturers.Commands.DeleteManufacturerByIdCommand;
+using Spareparts.Application.Manufacturers.Commands.UpdateManufacturerById;
 using Spareparts.Application.Manufacturers.Queries;
 using Spareparts.Application.Manufacturers.Queries.GetAllManufacturer;
+using Spareparts.Application.Manufacturers.Queries.GetManufacturerById;
 
 namespace Spareparts.API.Controllers;
 [ApiController]
@@ -25,6 +27,26 @@ public class ManufacturerController (IMediator mediator) : Controller {
     public async Task<IActionResult> GetAllManufacturers() {
         var allManufacturers = await mediator.Send(new GetAllManufacturersQuery());
         return Ok(allManufacturers);
+    }
+    [HttpGet]
+    [Route("GetManufacturerById")]
+    public async Task<IActionResult> GetManufacturerById (Guid id) {
+        var entity = mediator.Send(new GetManufacturerByIdQuery(id));
+        return Ok(entity);
+    }
+    #endregion
+    #region UPDATE 
+    [HttpPatch]
+    [Route("UpdateManufacturerById")]
+    public async Task<IActionResult> UpdateManufacturerById(Guid id, [FromBody] UpdateManufacturerByIdCommand command) {
+        command.Id = id; // Set the ID in the command object
+        var isUpdated = await mediator.Send(command);
+        if (isUpdated != null) {
+            return Ok("Manufacturer updated successfully.");
+        }
+        else {
+            return NotFound("Manufacturer not found.");
+        }
     }
     #endregion
     #region DELETE

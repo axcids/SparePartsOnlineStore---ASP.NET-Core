@@ -5,7 +5,7 @@ using Spareparts.Domain.Entities;
 using Spareparts.Domain.Repositories;
 
 namespace Spareparts.Application.Suppliers.Commands.UpdateSupplierById;
-public class UpdateSupplierByIdCommandHandler(ISupplierRepository supplierRepository, ILogger<UpdateSupplierByIdCommandHandler> logger) : IRequestHandler<UpdateSupplierByIdCommand, SuppliersDtos> {
+public class UpdateSupplierByIdCommandHandler (ISupplierRepository supplierRepository, ILogger<UpdateSupplierByIdCommandHandler> logger) : IRequestHandler<UpdateSupplierByIdCommand, SuppliersDtos> {
     public async Task<SuppliersDtos> Handle(UpdateSupplierByIdCommand request, CancellationToken cancellationToken) {
         Supplier UpdatedSupplier = new Supplier {
             Name = request.Name,

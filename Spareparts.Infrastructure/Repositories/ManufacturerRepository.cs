@@ -27,7 +27,10 @@ internal class ManufacturerRepository(SparepartsDbContext dbContext) : IManufact
         var allManufacturers = dbContext.Manufacturers.ToList();
         return allManufacturers;
     }
-
+    public async Task<Manufacturer> GetManufacturerById(Guid id) {
+        var manufacturer = await dbContext.Manufacturers.FirstOrDefaultAsync(x => x.Id == id);
+        return manufacturer;
+    }
     public async Task<Manufacturer> UpdateManufacturerById(Guid Id, Manufacturer newManufacturer) {
         //Validate the input Manufacturer object if necessary
         if(newManufacturer == null) {
@@ -38,7 +41,7 @@ internal class ManufacturerRepository(SparepartsDbContext dbContext) : IManufact
         fetchedEntity.Name = newManufacturer.Name;
         fetchedEntity.Description = newManufacturer.Description;
         fetchedEntity.Logo = newManufacturer.Logo;
-        dbContext.Entry(newManufacturer).State = EntityState.Modified;
+        dbContext.Update(fetchedEntity);
         await dbContext.SaveChangesAsync();
         return fetchedEntity;
 
