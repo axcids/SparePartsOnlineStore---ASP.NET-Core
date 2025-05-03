@@ -126,8 +126,8 @@ public class SparepartsDbContext : DbContext{
             entity.Property(y => y.SupplierId).IsRequired();
             entity.Property(y => y.ProductId).IsRequired();
             // ----- Relationships (Foreign Keys) -----
-            entity.HasOne(x => x.Supplier).WithMany(p => p.SupplierProducts).HasForeignKey(x => x.SupplierId).OnDelete(DeleteBehavior.NoAction);
-            entity.HasOne(x => x.ProductDetails).WithMany(p => p.SupplierProdouct).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.NoAction);
+            entity.HasOne(x => x.Supplier).WithMany(p => p.SupplierProducts).HasForeignKey(x => x.SupplierId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.ProductDetails).WithMany(p => p.SupplierProdouct).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.Cascade);
 
         });
         

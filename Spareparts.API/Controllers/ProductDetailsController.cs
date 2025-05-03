@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Spareparts.Application.CarsProducts.Commands.CreateCarProducts;
 using Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetails;
+using Spareparts.Application.ProductsDetails.Commands.DeleteProductDetailsById;
 using Spareparts.Application.ProductsDetails.Queries.GetAllProductsDetails;
 
 namespace Spareparts.API.Controllers;
@@ -22,11 +22,20 @@ public class ProductDetailsController (IMediator mediator) : Controller {
 
     #region GET
     [HttpGet]
-    [Route("GetAllCarProduct")]
-    public async Task<IActionResult> GetAllCarProduct() {
+    [Route("GetAllProductsDetails")]
+    public async Task<IActionResult> GetAllProductsDetails() {
         var AllProductDetails = await mediator.Send(new GetAllProductsDetailsQuery());
         return Ok(AllProductDetails);
     }
 
+    #endregion
+    #region DELETE
+    [HttpDelete]
+    [Route("DeleteProductDetailsById")]
+    public async Task<IActionResult> DeleteProductDetailsById(Guid id) {
+        var isDeleted = await mediator.Send(new DeleteProductDetailsByIdCommand(id));
+        if (isDeleted) return Ok();
+        return NotFound();
+    }
     #endregion
 }

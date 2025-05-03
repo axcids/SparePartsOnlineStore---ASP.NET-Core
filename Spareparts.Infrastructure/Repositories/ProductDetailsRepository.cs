@@ -12,5 +12,31 @@ internal class ProductDetailsRepository(SparepartsDbContext dbContext) : IProduc
         await dbContext.SaveChangesAsync();
         return entity.Id; //this might be error 
     }
-    
+
+    public async Task<bool> DeleteProductDetailsById(Guid id) {
+        var entity = await dbContext.ProductsDetails.FirstOrDefaultAsync(x => x.Id == id);
+        var isDeleted = dbContext.ProductsDetails.Remove(entity);
+        if (isDeleted != null) {
+            await dbContext.SaveChangesAsync();
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    public async Task<IEnumerable<ProductDetails>> GetAllProductsDetails() {
+        var entities = await dbContext.ProductsDetails.ToListAsync();
+        return entities;
+    }
+    public async Task<ProductDetails> GetProductDetailsById(Guid id) {
+        var entity= await dbContext.ProductsDetails.FirstOrDefaultAsync(x => x.Id == id);
+        return entity;
+
+    }
+
+    public Task<bool> UpdateProductDetails(ProductDetails entity) {
+        throw new NotImplementedException();
+    }
 }

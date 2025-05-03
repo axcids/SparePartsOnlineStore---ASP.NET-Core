@@ -1,4 +1,6 @@
 ﻿
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Spareparts.Application.Extensions; 
@@ -7,5 +9,6 @@ public static class ServiceCollectionExtensions {
         var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
         
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(applicationAssembly));
+        service.AddValidatorsFromAssembly(applicationAssembly).AddFluentValidation();
     }
 }
