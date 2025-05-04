@@ -2,6 +2,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using Spareparts.Application.Cars.Commands.CreateCar;
 
 namespace Spareparts.Application.Extensions; 
 public static class ServiceCollectionExtensions {

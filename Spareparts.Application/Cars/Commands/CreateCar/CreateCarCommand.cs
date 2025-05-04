@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Spareparts.Domain.Entities;
 
 namespace Spareparts.Application.Cars.Commands.CreateCar; 
 public class CreateCarCommand : IRequest<Guid> {
@@ -6,8 +7,8 @@ public class CreateCarCommand : IRequest<Guid> {
     public string Model { get; set; }         // e.g., Corolla, Civic
     public int ModelYear { get; set; }        // e.g., 2020, 2021
     public string? TrimLevel { get; set; }     // e.g., SE, EX, Premium
-    public string? BodyStyle { get; set; }     // e.g., Sedan, Hatchback, SUV
-    public string? TransmissionType { get; set; } // e.g., Manual, Automatic, CVT
-    public string? FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, 
+    public string BodyStyle { get; set; }     // e.g., Sedan, Hatchback, SUV
+    public string TransmissionType { get; set; } // e.g., Manual, Automatic, CVT
+    public string FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, 
 
 }

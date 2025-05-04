@@ -6,15 +6,19 @@ using Spareparts.Domain.Repositories;
 namespace Spareparts.Application.Cars.Commands.CreateCar;
 public class CreateCarCommandHandler(ICarRepository carRepository, ILogger<CreateCarCommandHandler> logger) : IRequestHandler<CreateCarCommand, Guid> {
     public async Task<Guid> Handle(CreateCarCommand request, CancellationToken cancellationToken) {
+        
+        BodyStyleEnum bodyStyle = Enum.Parse<BodyStyleEnum>(request.BodyStyle);
+        TransmissionTypeEnum transmissionType = Enum.Parse<TransmissionTypeEnum>(request.TransmissionType);
+        FuelTypeEnum fuelType = Enum.Parse<FuelTypeEnum>(request.FuelType);
+
         var car = new Car {
             ManufacturerId = request.ManufacturerId,
             Model = request.Model,
             ModelYear = request.ModelYear,
             TrimLevel = request.TrimLevel,
-            BodyStyle = request.BodyStyle,
-            TransmissionType = request.TransmissionType,
-            FuelType = request.FuelType,
-            UpdatedAt = null,
+            BodyStyle = bodyStyle,
+            TransmissionType = transmissionType,
+            FuelType = fuelType,
         };
         var id = await carRepository.AddNewCar(car);
         return id;

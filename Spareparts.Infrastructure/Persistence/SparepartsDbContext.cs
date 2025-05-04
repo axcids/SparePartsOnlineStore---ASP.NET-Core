@@ -21,33 +21,24 @@ public class SparepartsDbContext : DbContext{
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
 
-
-        // Configure the ProductDetails entity in the model
         modelBuilder.Entity<ProductDetails>(entity =>
         {
-
             // ----- Indexes -----
-            // Create a non-unique index on ManufacturerId
-            // Create a non-unique index on CategoryId
             entity.HasIndex(e => e.CategoryId, "IX_ProductDetails_CategoryId").IsUnique(false);
-            //entity.HasIndex(e => e.SupplierId, "IX_ProductDetails_SupplierId").IsUnique(false);
-
+            //entity.HasIndex(e => e.SupplierId, "IX_ProductDetails_SupplierId").IsUnique(false
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.Name).IsRequired();                       // Name cannot be NULL
             entity.Property(e => e.Description).IsRequired();                // Description cannot be NULL
             entity.Property(e => e.UPC).IsRequired();                        // UPC cannot be NULL
             entity.Property(e => e.CategoryId).IsRequired();                 // CategoryId cannot be NULL
-            //entity.Property(e => e.SupplierId).IsRequired();                 // SupplierIdcannot be NULL
             entity.Property(e => e.Price).IsRequired();                      // Price cannot be NULL
             entity.Property(e => e.WeightInKg).IsRequired();                 // WeightInKg cannot be NULL
             entity.Property(e => e.Dimensions).IsRequired();                 // Dimensions cannot be NULL
             entity.Property(e => e.Material).IsRequired();                   // Material cannot be NULL
             entity.Property(e => e.HasWarranty).IsRequired();                // HasWarranty cannot be NULL
             entity.Property(e => e.WarrantyPeriodInMonths).IsRequired();     // WarrantyPeriodInMonths cannot be NULL
-
             // Set property column type
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
-
             // ----- Relationships (Foreign Keys) -----
             // Many ProductDetails can reference the same Category
             entity.HasOne(e => e.Category)
@@ -55,28 +46,31 @@ public class SparepartsDbContext : DbContext{
                 .HasForeignKey(e => e.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
-
-        // Configure the Car entity in the model
         modelBuilder.Entity<Car>(entity => {
             // ----- Indexes -----
-            // Create a non-unique index on ManufacturerId
             entity.HasIndex(e => e.ManufacturerId, "IX_Car_ManufacturerId").IsUnique(false);
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.Model).IsRequired();     // Model cannot be NULL
             entity.Property(e => e.ModelYear).IsRequired(); // ModelYear cannot be NULL
+            entity.Property(e => e.TrimLevel).IsRequired(); // TrimLevel cannot be NULL
+            //entity.Property(e => e.BodyStyle).IsRequired(); // BodyStyle cannot be NULL
+            entity.Property(e => e.BodyStyle).HasConversion<string>(); 
+            //entity.Property(e => e.TransmissionType).IsRequired(); // TransmissionType cannot be NULL
+            entity.Property(e => e.TransmissionType).HasConversion<string>(); 
+            //entity.Property(e => e.FuelType).IsRequired(); // FuelType cannot be NULL
+            entity.Property(e => e.FuelType).HasConversion<string>();  
+            entity.Property(e => e.CreatedAt).IsRequired(); // CreatedAt cannot be NULL
+            entity.Property(e => e.UpdatedAt).IsRequired(); // UpdatedAt cannot be NULL
             // ----- Relationships (Foreign Keys) -----
-            // Many Cars can reference the same Manufacturer
             entity.HasOne(e => e.Manufacturers)
                 .WithMany(p => p.Cars)
                 .HasForeignKey(e => e.ManufacturerId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
-        // Configure the Category entity in the model
         modelBuilder.Entity<Category>(entity => {
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.Name).IsRequired();  // Name cannot be NULL
         });
-        // Configure the Manufacturer entity in the model
         modelBuilder.Entity<Manufacturer>(entity => {
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.Name).IsRequired();  // Name cannot be NULL 

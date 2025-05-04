@@ -4,22 +4,23 @@ using Spareparts.Application;
 using Spareparts.Infrastructure.Extensions;
 using Spareparts.Infrastructure.Seeders;
 using Spareparts.Application.Extensions;
+using Spareparts.API.Middlewares;
 
-//Create builder
+//Create builder:
 var builder = WebApplication.CreateBuilder(args);
-//Add Builders Extensions 
-builder.AddPresentation();
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
 
-
-
+//Add Builders Extensions:
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication();
 
+builder.Services.AddScoped<ErrorHandlingMiddle>();
+
+builder.AddPresentation();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 //Read from the appsettings file
 var ConnectionString = builder.Configuration.GetConnectionString("OfficeConnection");
@@ -30,6 +31,8 @@ var settingsContactEmail = builder.Configuration["Settings:ContactEmail"];
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ErrorHandlingMiddle>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

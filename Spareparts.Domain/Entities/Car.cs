@@ -10,10 +10,10 @@ public class Car {
     public int ModelYear { get; set; }        // e.g., 2020, 2021
 
     // Optional details
-    public string? TrimLevel { get; set; }     // e.g., SE, EX, Premium
-    public string? BodyStyle { get; set; }     // e.g., Sedan, Hatchback, SUV
-    public string? TransmissionType { get; set; } // e.g., Manual, Automatic, CVT
-    public string? FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, Hybrid
+    public string TrimLevel { get; set; }     // e.g., SE, EX, Premium
+    public BodyStyleEnum BodyStyle { get; set; }     // e.g., Sedan, Hatchback, SUV
+    public TransmissionTypeEnum TransmissionType { get; set; } // e.g., Manual, Automatic, CVT
+    public FuelTypeEnum FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, Hybrid
 
     // Timestamps for creation and updates
     public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -24,3 +24,29 @@ public class Car {
 
 
 }
+public enum BodyStyleEnum {
+    sedan,
+    hatchback,
+    suv,
+    coupe,
+    convertible,
+    pickup_truck,
+    minivan,
+    station_wagon,
+    crossover,
+    sports_car
+}
+public enum TransmissionTypeEnum {
+    manual,
+    automatic,
+    cvt, // Continuously Variable Transmission
+    semi_automatic
+}
+public enum FuelTypeEnum {
+    gasoline,
+    diesel,
+    electric,
+    hybrid,
+    plugin_hybrid
+}
+

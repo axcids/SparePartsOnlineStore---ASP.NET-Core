@@ -9,9 +9,10 @@ public class CarsDtos {
     public string Model { get; set; }         // e.g., Corolla, Civic
     public int ModelYear { get; set; }        // e.g., 2020, 2021
     public string? TrimLevel { get; set; }     // e.g., SE, EX, Premium
-    public string? BodyStyle { get; set; }     // e.g., Sedan, Hatchback, SUV
-    public string? TransmissionType { get; set; } // e.g., Manual, Automatic, CVT
-    public string? FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, 
+    public BodyStyleEnum BodyStyle { get; set; }     // e.g., Sedan, Hatchback, SUV
+    public TransmissionTypeEnum TransmissionType { get; set; } // e.g., Manual, Automatic, CVT
+    public FuelTypeEnum FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, 
+
 
     public static CarsDtos? FromEntity(Car? car) {
         if (car == null) return null;
