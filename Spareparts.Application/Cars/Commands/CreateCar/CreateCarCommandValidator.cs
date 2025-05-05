@@ -7,13 +7,15 @@ using Spareparts.Domain.Repositories;
 
 namespace Spareparts.Application.Cars.Commands.CreateCar; 
 public class CreateCarCommandValidator : AbstractValidator<CreateCarCommand>{
-
+    
     public CreateCarCommandValidator() {
 
 
         RuleFor(x => x.ManufacturerId)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} cannot be null.");
+            
+
 
         RuleFor(x => x.Model)
             .NotEmpty().WithMessage("{PropertyName} is required.")

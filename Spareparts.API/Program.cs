@@ -16,7 +16,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication();
 
-builder.Services.AddScoped<ErrorHandlingMiddle>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails(options => {
+    options.CustomizeProblemDetails = context => {
+        context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
+    };
+});
 
 builder.AddPresentation();
 builder.Services.AddApplication();
@@ -32,7 +37,9 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseMiddleware<ErrorHandlingMiddle>();
+//app.UseMiddleware<ErrorHandlingMiddle>();
+app.UseExceptionHandler();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
