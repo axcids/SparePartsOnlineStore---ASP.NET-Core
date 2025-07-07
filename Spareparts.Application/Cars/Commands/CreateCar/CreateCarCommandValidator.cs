@@ -1,9 +1,5 @@
 ﻿using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Spareparts.Domain.Entities;
-using Spareparts.Domain.Repositories;
+using static Spareparts.Domain.Entities.Enums.CarEnums;
 
 namespace Spareparts.Application.Cars.Commands.CreateCar; 
 public class CreateCarCommandValidator : AbstractValidator<CreateCarCommand>{

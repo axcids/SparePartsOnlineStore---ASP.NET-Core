@@ -1,4 +1,6 @@
 ﻿using Spareparts.Domain.Entities;
+using static Spareparts.Domain.Entities.Enums.CarEnums;
+
 
 namespace Spareparts.Application.Cars.Dtos; 
 public class CarsDtos {
@@ -12,7 +14,6 @@ public class CarsDtos {
     public BodyStyleEnum BodyStyle { get; set; }     // e.g., Sedan, Hatchback, SUV
     public TransmissionTypeEnum TransmissionType { get; set; } // e.g., Manual, Automatic, CVT
     public FuelTypeEnum FuelType { get; set; }      // e.g., Gasoline, Diesel, Electric, 
-
 
     public static CarsDtos? FromEntity(Car? car) {
         if (car == null) return null;

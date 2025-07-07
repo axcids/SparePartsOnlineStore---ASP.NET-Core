@@ -9,20 +9,15 @@ using Spareparts.API.Middlewares;
 //Create builder:
 var builder = WebApplication.CreateBuilder(args);
 
-//Add Builders Extensions:
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication();
-
-builder.Services.AddScoped<ErrorHandlingMiddle>();
-
+//Add Extensions builders:
 builder.AddPresentation();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-//Read from the appsettings file
+// Adding Middlewares 
+builder.Services.AddScoped<ErrorHandlingMiddle>();
+
+// Read from the appsettings file some variables.
 var ConnectionString = builder.Configuration.GetConnectionString("OfficeConnection");
 var settingsAppName = builder.Configuration["Settings:AppName"];
 var settingsContactEmail = builder.Configuration["Settings:ContactEmail"];
@@ -30,9 +25,16 @@ var settingsContactEmail = builder.Configuration["Settings:ContactEmail"];
 //Building the application pipeline
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 
+// =======================================
+// Configure the HTTP request pipeline.
+// =======================================
+
+
+// Use 
 app.UseMiddleware<ErrorHandlingMiddle>();
+
+// Configure the development application enviroment 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -49,7 +51,7 @@ using (var scope = app.Services.CreateScope()) {
     await ManufacturerSeeder.Seed();
 }
 
-//Middlewares
+//  Using the app services
 app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllers();

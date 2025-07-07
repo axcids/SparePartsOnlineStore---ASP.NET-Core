@@ -11,8 +11,8 @@ public class UpdateCarCommand : IRequest<CarsDtos>{
     public string Model { get; set; } 
     public int ModelYear { get; set; }
     public string? TrimLevel { get; set; }    
-    public BodyStyleEnum BodyStyle { get; set; }
-    public TransmissionTypeEnum TransmissionType { get; set; } 
-    public FuelTypeEnum FuelType { get; set; } 
+    public string BodyStyle { get; set; }
+    public string TransmissionType { get; set; } 
+    public string FuelType { get; set; } 
 
 }
