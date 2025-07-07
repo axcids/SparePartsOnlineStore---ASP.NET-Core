@@ -3,13 +3,15 @@ using static Spareparts.Domain.Entities.Enums.CarEnums;
 
 namespace Spareparts.Application.Cars.Commands.CreateCar; 
 public class CreateCarCommandValidator : AbstractValidator<CreateCarCommand>{
-
+    
     public CreateCarCommandValidator() {
 
 
         RuleFor(x => x.ManufacturerId)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} cannot be null.");
+            
+
 
         RuleFor(x => x.Model)
             .NotEmpty().WithMessage("{PropertyName} is required.")

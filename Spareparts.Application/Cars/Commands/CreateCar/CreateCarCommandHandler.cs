@@ -5,12 +5,17 @@ using Spareparts.Domain.Repositories;
 using static Spareparts.Domain.Entities.Enums.CarEnums;
 
 namespace Spareparts.Application.Cars.Commands.CreateCar;
-public class CreateCarCommandHandler(ICarRepository carRepository, ILogger<CreateCarCommandHandler> logger) : IRequestHandler<CreateCarCommand, Guid> {
+public class CreateCarCommandHandler(IManufacturerRepository manufacturerRepository, ICarRepository carRepository, ILogger<CreateCarCommandHandler> logger) : IRequestHandler<CreateCarCommand, Guid> {
     public async Task<Guid> Handle(CreateCarCommand request, CancellationToken cancellationToken) {
         
         BodyStyleEnum bodyStyleEnum = Enum.Parse<BodyStyleEnum>(request.BodyStyle);
         TransmissionTypeEnum transmissionTypeEnum = Enum.Parse<TransmissionTypeEnum>(request.TransmissionType);
         FuelTypeEnum fuelTypeEnum = Enum.Parse<FuelTypeEnum>(request.FuelType);
+
+        var manufacturerExist = await manufacturerRepository.GetManufacturerById(request.ManufacturerId);
+        if(manufacturerExist is null) {
+            throw new ArgumentException("Manufacturer ID is not Valid");
+        }
 
         var car = new Car {
             ManufacturerId = request.ManufacturerId,
