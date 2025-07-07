@@ -59,8 +59,6 @@ public class SparepartsDbContext : DbContext{
             entity.Property(e => e.TransmissionType).HasConversion<string>(); 
             //entity.Property(e => e.FuelType).IsRequired(); // FuelType cannot be NULL
             entity.Property(e => e.FuelType).HasConversion<string>();  
-            entity.Property(e => e.CreatedAt).IsRequired(); // CreatedAt cannot be NULL
-            entity.Property(e => e.UpdatedAt).IsRequired(); // UpdatedAt cannot be NULL
             // ----- Relationships (Foreign Keys) -----
             entity.HasOne(e => e.Manufacturers)
                 .WithMany(p => p.Cars)

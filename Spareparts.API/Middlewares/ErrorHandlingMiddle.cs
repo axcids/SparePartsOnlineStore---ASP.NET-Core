@@ -8,12 +8,10 @@ public class ErrorHandlingMiddle : IMiddleware {
             await next.Invoke(context);
         }catch(Exception ex) {
 
-            context.Response.StatusCode = ex.HResult;
             context.Response.ContentType = "application/json";
             var error = new ErrorMessage {
-                StatusCode = 500,
+                StatusCode = context.Response.StatusCode,
                 Message = ex.Message,
-                Details = ex.InnerException.ToString()
             };
 
             var json = JsonSerializer.Serialize(error);
