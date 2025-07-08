@@ -15,7 +15,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Adding Middlewares 
-builder.Services.AddScoped<ErrorHandlingMiddle>();
+builder.Services.AddScoped<ExceptionHandlingMiddleware>();
 
 // Read from the appsettings file some variables.
 var ConnectionString = builder.Configuration.GetConnectionString("OfficeConnection");
@@ -32,7 +32,7 @@ var app = builder.Build();
 
 
 // Use 
-app.UseMiddleware<ErrorHandlingMiddle>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the development application enviroment 
 if (app.Environment.IsDevelopment())

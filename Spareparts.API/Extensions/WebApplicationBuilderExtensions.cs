@@ -1,10 +1,14 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace Spareparts.API.Extensions; 
 public static class WebApplicationBuilderExtensions {
     public static void AddPresentation(this WebApplicationBuilder builder) {
         // Adding Controllers services
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        }); 
         // Adding Swagger services
         builder.Services.AddSwaggerGen(c => {
             // Adding Swagger documentation

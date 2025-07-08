@@ -27,7 +27,7 @@ public class UpdateCarCommandHandler(ICarRepository carRepository, ILogger<Updat
                 FuelType = fuelTypeEnum
             };
             await carRepository.UpdateCarById(request.Id, newCar);
-            var carDto = CarsDtos.FromEntity(newCar);
+            var carDto = CarsDtos.FromEntity(car);
             return carDto;
         }else {
             logger.LogError("Car not found");

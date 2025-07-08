@@ -13,8 +13,8 @@ public class CreateCarCommandHandler(IManufacturerRepository manufacturerReposit
         FuelTypeEnum fuelTypeEnum = Enum.Parse<FuelTypeEnum>(request.FuelType);
 
         var manufacturerExist = await manufacturerRepository.GetManufacturerById(request.ManufacturerId);
-        if(manufacturerExist is null) {
-            throw new ArgumentException("Manufacturer ID is not Valid");
+        if (manufacturerExist == default) {
+            throw new Exception("Manufacturer ID does not exist.");
         }
 
         var car = new Car {

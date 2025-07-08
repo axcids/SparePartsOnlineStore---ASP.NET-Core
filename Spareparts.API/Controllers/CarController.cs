@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Cars.Commands.CreateCar;
-using Spareparts.Application.Cars.Commands.DeleteCar;
+using Spareparts.Application.Cars.Commands.DeleteCarById;
 using Spareparts.Application.Cars.Commands.UpdateCarCommand;
 using Spareparts.Application.Cars.Commands.UpdateCarNameCommand;
 using Spareparts.Application.Cars.Queries.GetAllCars;

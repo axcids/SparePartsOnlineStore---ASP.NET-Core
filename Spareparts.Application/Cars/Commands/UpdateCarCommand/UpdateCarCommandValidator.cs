@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using static Spareparts.Domain.Entities.Enums.CarEnums;
 
-namespace Spareparts.Application.Cars.Commands.CreateCar; 
-public class UpdateCarCommandValidator : AbstractValidator<CreateCarCommand>{
+namespace Spareparts.Application.Cars.Commands.UpdateCarCommand; 
+public class UpdateCarCommandValidator : AbstractValidator<UpdateCarCommand> {
     
     public UpdateCarCommandValidator() {
 
