@@ -4,7 +4,7 @@ using Spareparts.Application.Categories.Dtos;
 using Spareparts.Domain.Entities;
 using Spareparts.Domain.Repositories;
 
-namespace Spareparts.Application.Categories.Commands.UpdateCategoryByIdCommand;
+namespace Spareparts.Application.Categories.Commands.UpdateCategoryById;
 public class UpdateCategoryByIdCommandHandler(ICategoryRepository categoryRepository, ILogger<UpdateCategoryByIdCommandHandler> logger) : IRequestHandler<UpdateCategoryByIdCommand, CategoriesDtos> {
     public async Task<CategoriesDtos> Handle(UpdateCategoryByIdCommand request, CancellationToken cancellationToken) {
         var newEntity = new Category() {

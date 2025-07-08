@@ -2,8 +2,8 @@
 using MediatR;
 using Spareparts.Application.Categories.Commands.CreateNewCategory;
 using Spareparts.Application.Categories.Queries.GetAllCategories;
-using Spareparts.Application.Categories.Commands.UpdateCategoryByIdCommand;
-using Spareparts.Application.Categories.Commands.DeleteCategoryByIdCommand;
+using Spareparts.Application.Categories.Commands.UpdateCategoryById;
+using Spareparts.Application.Categories.Commands.DeleteCategoryById;
 using Spareparts.Application.Categories.Queries.GetCategoryById;
 
 namespace Spareparts.API.Controllers;

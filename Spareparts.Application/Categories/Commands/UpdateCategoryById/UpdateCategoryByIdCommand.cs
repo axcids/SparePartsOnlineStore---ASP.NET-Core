@@ -3,7 +3,7 @@ using Spareparts.Application.Categories.Dtos;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
-namespace Spareparts.Application.Categories.Commands.UpdateCategoryByIdCommand; 
+namespace Spareparts.Application.Categories.Commands.UpdateCategoryById; 
 public class UpdateCategoryByIdCommand : IRequest<CategoriesDtos>{
     [JsonIgnore]
     public Guid Id { get; set; }

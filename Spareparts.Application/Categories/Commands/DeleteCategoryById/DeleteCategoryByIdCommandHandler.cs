@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Spareparts.Domain.Repositories;
 
-namespace Spareparts.Application.Categories.Commands.DeleteCategoryByIdCommand;
+namespace Spareparts.Application.Categories.Commands.DeleteCategoryById;
 public class DeleteCategoryByIdCommandHandler(ICategoryRepository categoryRepository, ILogger<DeleteCategoryByIdCommandHandler> logger) : IRequestHandler<DeleteCategoryByIdCommand, bool> {
     public Task<bool> Handle(DeleteCategoryByIdCommand request, CancellationToken cancellationToken) {
         var isDeleted = categoryRepository.DeleteCategoryById(request.Id);
