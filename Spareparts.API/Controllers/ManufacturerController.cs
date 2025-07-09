@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Spareparts.Application.Categories.Commands.CreateNewCategory;
-using Spareparts.Application.Manufacturers.Commands.CreateNewManufacturerCommand;
-using Spareparts.Application.Manufacturers.Commands.DeleteManufacturerByIdCommand;
+using Spareparts.Application.Manufacturers.Commands.CreateNewManufacturer;
+using Spareparts.Application.Manufacturers.Commands.DeleteManufacturerById;
 using Spareparts.Application.Manufacturers.Commands.UpdateManufacturerById;
 using Spareparts.Application.Manufacturers.Queries;
 using Spareparts.Application.Manufacturers.Queries.GetAllManufacturer;
