@@ -11,7 +11,7 @@ namespace Spareparts.Infrastructure.Persistence;
 public class SparepartsDbContext : DbContext{
 
     public SparepartsDbContext(DbContextOptions<SparepartsDbContext> options) : base(options) {}
-    internal DbSet<ProductDetails> ProductsDetails { get; set; }
+    internal DbSet<Product> Products { get; set; }
     internal DbSet<Car> Cars{ get; set; }
     internal DbSet<Category> categories { get; set; }
     internal DbSet<Manufacturer> Manufacturers { get; set; }
@@ -21,7 +21,7 @@ public class SparepartsDbContext : DbContext{
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<ProductDetails>(entity =>
+        modelBuilder.Entity<Product>(entity =>
         {
             // ----- Indexes -----
             entity.HasIndex(e => e.CategoryId, "IX_ProductDetails_CategoryId").IsUnique(false);

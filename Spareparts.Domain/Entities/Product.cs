@@ -1,6 +1,6 @@
 ﻿namespace Spareparts.Domain.Entities;
 
-public class ProductDetails {
+public class Product {
 
     // Unique identifier for the product
     public Guid Id { get; set; }

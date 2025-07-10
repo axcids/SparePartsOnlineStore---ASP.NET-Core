@@ -10,6 +10,6 @@ public class SupplierProduct {
 
     //Product 
     public Guid ProductId { get; set; }
-    public virtual ProductDetails ProductDetails { get; set; }
+    public virtual Product ProductDetails { get; set; }
 
 }

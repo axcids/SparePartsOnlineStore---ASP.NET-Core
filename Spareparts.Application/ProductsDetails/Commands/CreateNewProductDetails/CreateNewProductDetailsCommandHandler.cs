@@ -9,10 +9,10 @@ using Spareparts.Domain.Entities;
 using Spareparts.Domain.Repositories;
 
 namespace Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetails {
-    internal class CreateNewProductDetailsCommandHandler(IProductDetailsRepository productDetails, ILogger<CreateNewProductDetailsCommandHandler> logger) : IRequestHandler<CreateNewProductDetailsCommand, Guid> {
+    internal class CreateNewProductDetailsCommandHandler(IProductRepository productDetails, ILogger<CreateNewProductDetailsCommandHandler> logger) : IRequestHandler<CreateNewProductDetailsCommand, Guid> {
         public async Task<Guid> Handle(CreateNewProductDetailsCommand request, CancellationToken cancellationToken) {
           
-            var entity = new ProductDetails {
+            var entity = new Product {
                 CategoryId = request.CategoryId,
                 Name = request.Name,
                 Description = request.Description,

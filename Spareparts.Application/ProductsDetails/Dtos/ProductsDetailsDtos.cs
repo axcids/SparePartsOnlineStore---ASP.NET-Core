@@ -19,7 +19,7 @@ public class ProductsDetailsDtos {
     public DateTime? UpdatedAt { get; set; }
 
 
-    public static ProductsDetailsDtos? FromEntity(ProductDetails productDetails) {
+    public static ProductsDetailsDtos? FromEntity(Product productDetails) {
         if (productDetails == null) return null;
         return new ProductsDetailsDtos() {
             Id = productDetails.Id,

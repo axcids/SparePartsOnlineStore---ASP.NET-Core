@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Spareparts.Domain.Repositories;
 
 namespace Spareparts.Application.ProductsDetails.Commands.DeleteProductDetailsById;
-public class DeleteProductDetailsByIdCommandHandler(IProductDetailsRepository productDetailsRepository, ILogger<DeleteProductDetailsByIdCommandHandler> logger) : IRequestHandler<DeleteProductDetailsByIdCommand, bool> {
+public class DeleteProductDetailsByIdCommandHandler(IProductRepository productDetailsRepository, ILogger<DeleteProductDetailsByIdCommandHandler> logger) : IRequestHandler<DeleteProductDetailsByIdCommand, bool> {
     public async Task<bool> Handle(DeleteProductDetailsByIdCommand request, CancellationToken cancellationToken) {
         var isDeleted = await productDetailsRepository.DeleteProductDetailsById(request.Id);
         if (isDeleted) {

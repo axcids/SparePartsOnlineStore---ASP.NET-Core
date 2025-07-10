@@ -21,7 +21,7 @@ namespace Spareparts.Infrastructure.Extensions {
             services.AddDbContext<SparepartsDbContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
 
             //Add Scoped Entities ....
-            services.AddScoped<IProductDetailsRepository, ProductDetailsRepository>();
+            services.AddScoped<IProductRepository, ProductDetailsRepository>();
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
