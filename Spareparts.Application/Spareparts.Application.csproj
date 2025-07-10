@@ -17,12 +17,4 @@
     <ProjectReference Include="..\Spareparts.Domain\Spareparts.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Products\Commands\DeleteProduct\" />
-    <Folder Include="Products\Commands\UpdateProduct\" />
-    <Folder Include="Products\Queries\GetAllProducts\" />
-    <Folder Include="Products\Queries\GetProductById\" />
-    <Folder Include="Products\Queries\GetProductsByCategoryId\" />
-  </ItemGroup>
-
 </Project>
