@@ -27,8 +27,8 @@ public class CreateNewProductCommandValidator : AbstractValidator<CreateNewProdu
             .MaximumLength(500).WithMessage("Product description cannot exceed 500 characters.");
         RuleFor(command => command.UPC)
             .NotEmpty().WithMessage("UPC is required.")
-            .NotNull().WithMessage("UPC cannot be null.")
-            .Matches(@"^\d{12,13}$").WithMessage("UPC must be 12 or 13 digits long."); //Nedd to fix or compelet this later 
+            .NotNull().WithMessage("UPC cannot be null.");
+            //.Matches(@"^\d{12,13}$").WithMessage("UPC must be 12 or 13 digits long."); Nedd to fix or compelet this later 
         RuleFor(command => command.Price)
             .NotEmpty().WithMessage("Price is required.")
             .NotNull().WithMessage("Price cannot be null.")

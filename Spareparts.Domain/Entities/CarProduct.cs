@@ -10,6 +10,6 @@ public class CarProduct {
 
     //Product 
     public Guid ProductId { get; set; }
-    public virtual Product ProductDetails { get; set; }
+    public virtual Product Product { get; set; }
 
 }

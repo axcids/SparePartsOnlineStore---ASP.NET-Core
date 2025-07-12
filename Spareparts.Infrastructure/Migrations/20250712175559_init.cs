@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Spareparts.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class INIT : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -70,7 +70,7 @@ namespace Spareparts.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductsDetails",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -89,9 +89,9 @@ namespace Spareparts.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductsDetails", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductsDetails_categories_CategoryId",
+                        name: "FK_Products_categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "categories",
                         principalColumn: "Id",
@@ -106,10 +106,10 @@ namespace Spareparts.Infrastructure.Migrations
                     ManufacturerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ModelYear = table.Column<int>(type: "int", nullable: false),
-                    TrimLevel = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BodyStyle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TransmissionType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FuelType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrimLevel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BodyStyle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TransmissionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FuelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -136,15 +136,17 @@ namespace Spareparts.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_SupplierProduct", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SupplierProduct_ProductsDetails_ProductId",
+                        name: "FK_SupplierProduct_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "ProductsDetails",
-                        principalColumn: "Id");
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SupplierProduct_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -163,13 +165,13 @@ namespace Spareparts.Infrastructure.Migrations
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CarsProducts_ProductsDetails_ProductId",
+                        name: "FK_CarsProducts_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "ProductsDetails",
+                        principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -183,26 +185,24 @@ namespace Spareparts.Infrastructure.Migrations
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarProduct_ProductDetails",
+                name: "IX_CarProduct_Product",
                 table: "CarsProducts",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductDetails_CategoryId",
-                table: "ProductsDetails",
+                name: "IX_Product_CategoryId",
+                table: "Products",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SupplierProduct_ProductDetails",
+                name: "IX_SupplierProduct_Product",
                 table: "SupplierProduct",
-                column: "ProductId",
-                unique: true);
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SupplierProduct_SupplierId",
                 table: "SupplierProduct",
-                column: "SupplierId",
-                unique: true);
+                column: "SupplierId");
         }
 
         /// <inheritdoc />
@@ -218,7 +218,7 @@ namespace Spareparts.Infrastructure.Migrations
                 name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "ProductsDetails");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");

@@ -17,5 +17,5 @@ public class Category {
     public DateTime? UpdatedAt{ get; set; }
 
     // Accessible Properties
-    public virtual List<Product> ProductsDetails { get; set; }
+    public virtual List<Product> Products { get; set; }
 }

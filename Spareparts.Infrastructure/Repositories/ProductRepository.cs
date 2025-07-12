@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Spareparts.Domain.Entities;
 
 namespace Spareparts.Infrastructure.Repositories;
-internal class ProductDetailsRepository(SparepartsDbContext dbContext) : IProductRepository {
+public class ProductRepository(SparepartsDbContext dbContext) : IProductRepository {
     public async Task<Guid> AddNewProduct(Product entity) {
         dbContext.Add(entity);
         await dbContext.SaveChangesAsync();

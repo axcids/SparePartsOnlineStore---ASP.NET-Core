@@ -1,19 +1,20 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Spareparts.Application.ProductsDetails.Commands.CreateNewProductDetails;
-using Spareparts.Application.ProductsDetails.Commands.DeleteProductDetailsById;
-using Spareparts.Application.ProductsDetails.Queries.GetAllProductsDetails;
+using Spareparts.Application.Products.Commands.CreateNewProduct;
+using Spareparts.Application.Products.Commands.DeleteProductById;
+using Spareparts.Application.Products.Queries.GetAllProducts;
+
 
 namespace Spareparts.API.Controllers;
 [ApiController]
-[Route("api/productdetails/")]
-public class ProductDetailsController (IMediator mediator) : Controller {
+[Route("api/Product/")]
+public class ProductController (IMediator mediator) : Controller {
 
     #region POST
     [HttpPost]
     [Route("AddNewProduct")]
-    public async Task<IActionResult> AddNewProduct([FromBody] CreateNewProductDetailsCommand productDetailsCommand) {
-        var productId = await mediator.Send(productDetailsCommand);
+    public async Task<IActionResult> AddNewProduct([FromBody] CreateNewProductCommand ProductCommand) {
+        var productId = await mediator.Send(ProductCommand);
         if (productId != default(Guid)) return Ok(productId);
         return null;
     }
@@ -22,18 +23,18 @@ public class ProductDetailsController (IMediator mediator) : Controller {
 
     #region GET
     [HttpGet]
-    [Route("GetAllProductsDetails")]
-    public async Task<IActionResult> GetAllProductsDetails() {
-        var AllProductDetails = await mediator.Send(new GetAllProductsDetailsQuery());
-        return Ok(AllProductDetails);
+    [Route("GetAllProduct")]
+    public async Task<IActionResult> GetAllProduct() {
+        var AllProduct = await mediator.Send(new GetAllProductsQuery());
+        return Ok(AllProduct);
     }
 
     #endregion
     #region DELETE
     [HttpDelete]
-    [Route("DeleteProductDetailsById")]
-    public async Task<IActionResult> DeleteProductDetailsById(Guid id) {
-        var isDeleted = await mediator.Send(new DeleteProductDetailsByIdCommand(id));
+    [Route("DeleteProductById")]
+    public async Task<IActionResult> DeleteProductById(Guid id) {
+        var isDeleted = await mediator.Send(new DeleteProductByIdCommand(id));
         if (isDeleted) return Ok();
         return NotFound();
     }

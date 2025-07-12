@@ -24,8 +24,8 @@ public class SparepartsDbContext : DbContext{
         modelBuilder.Entity<Product>(entity =>
         {
             // ----- Indexes -----
-            entity.HasIndex(e => e.CategoryId, "IX_ProductDetails_CategoryId").IsUnique(false);
-            //entity.HasIndex(e => e.SupplierId, "IX_ProductDetails_SupplierId").IsUnique(false
+            entity.HasIndex(e => e.CategoryId, "IX_Product_CategoryId").IsUnique(false);
+            //entity.HasIndex(e => e.SupplierId, "IX_Product_SupplierId").IsUnique(false
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.Name).IsRequired();                       // Name cannot be NULL
             entity.Property(e => e.Description).IsRequired();                // Description cannot be NULL
@@ -40,9 +40,9 @@ public class SparepartsDbContext : DbContext{
             // Set property column type
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             // ----- Relationships (Foreign Keys) -----
-            // Many ProductDetails can reference the same Category
+            // Many Product can reference the same Category
             entity.HasOne(e => e.Category)
-                .WithMany(p => p.ProductsDetails)
+                .WithMany(p => p.Products)
                 .HasForeignKey(e => e.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
@@ -80,7 +80,7 @@ public class SparepartsDbContext : DbContext{
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.CarId).IsRequired();
             // Create a non-unique index on product id
-            entity.HasIndex(e => e.ProductId, "IX_CarProduct_ProductDetails").IsUnique(false);
+            entity.HasIndex(e => e.ProductId, "IX_CarProduct_Product").IsUnique(false);
             // ----- Required/Non-Nullable Properties -----
             entity.Property(e => e.ProductId).IsRequired();
             // ----- Relationships (Foreign Keys) -----
@@ -89,7 +89,7 @@ public class SparepartsDbContext : DbContext{
            .HasForeignKey(cp => cp.CarId)
            .OnDelete(DeleteBehavior.Cascade); // Optional: or Restrict
 
-            entity.HasOne(cp => cp.ProductDetails)
+            entity.HasOne(cp => cp.Product)
                   .WithMany(pd => pd.CarsProducts)
                   .HasForeignKey(cp => cp.ProductId)
                   .OnDelete(DeleteBehavior.Cascade); // Optional
@@ -113,13 +113,13 @@ public class SparepartsDbContext : DbContext{
         modelBuilder.Entity<SupplierProduct>(entity => {
             // ----- Indexes -----
             entity.HasIndex(p => p.SupplierId, "IX_SupplierProduct_SupplierId").IsUnique(false);
-            entity.HasIndex(p => p.ProductId, "IX_SupplierProduct_ProductDetails").IsUnique(false);
+            entity.HasIndex(p => p.ProductId, "IX_SupplierProduct_Product").IsUnique(false);
             // ----- Required/Non-Nullable Properties -----
             entity.Property(y => y.SupplierId).IsRequired();
             entity.Property(y => y.ProductId).IsRequired();
             // ----- Relationships (Foreign Keys) -----
             entity.HasOne(x => x.Supplier).WithMany(p => p.SupplierProducts).HasForeignKey(x => x.SupplierId).OnDelete(DeleteBehavior.Cascade);
-            entity.HasOne(x => x.ProductDetails).WithMany(p => p.SupplierProdouct).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.Product).WithMany(p => p.SupplierProdouct).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.Cascade);
 
         });
         

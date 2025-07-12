@@ -27,6 +27,7 @@ internal class CarRepository(SparepartsDbContext dbContext) : ICarRepository {
     }
 
     public async Task<Car?> UpdateCarModel(Guid CarId, string newModel) {
+        // Chane this later from boolean to somethion result based 
         var car = await dbContext.Cars.FirstOrDefaultAsync(r => r.Id == CarId);
         if (car == null) return null;
         car.Model = newModel;

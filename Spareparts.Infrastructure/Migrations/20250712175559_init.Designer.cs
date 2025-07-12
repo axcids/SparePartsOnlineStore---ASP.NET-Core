@@ -12,8 +12,8 @@ using Spareparts.Infrastructure.Persistence;
 namespace Spareparts.Infrastructure.Migrations
 {
     [DbContext(typeof(SparepartsDbContext))]
-    [Migration("20250502222708_fixRelationships")]
-    partial class fixRelationships
+    [Migration("20250712175559_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,12 +32,14 @@ namespace Spareparts.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BodyStyle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FuelType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ManufacturerId")
@@ -51,9 +53,11 @@ namespace Spareparts.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TransmissionType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TrimLevel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -82,7 +86,7 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.HasIndex(new[] { "CarId" }, "IX_CarProduct_Car");
 
-                    b.HasIndex(new[] { "ProductId" }, "IX_CarProduct_ProductDetails");
+                    b.HasIndex(new[] { "ProductId" }, "IX_CarProduct_Product");
 
                     b.ToTable("CarsProducts");
                 });
@@ -138,7 +142,7 @@ namespace Spareparts.Infrastructure.Migrations
                     b.ToTable("Manufacturers");
                 });
 
-            modelBuilder.Entity("Spareparts.Domain.Entities.ProductDetails", b =>
+            modelBuilder.Entity("Spareparts.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,9 +192,9 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "CategoryId" }, "IX_ProductDetails_CategoryId");
+                    b.HasIndex(new[] { "CategoryId" }, "IX_Product_CategoryId");
 
-                    b.ToTable("ProductsDetails");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Spareparts.Domain.Entities.Supplier", b =>
@@ -276,7 +280,7 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "ProductId" }, "IX_SupplierProduct_ProductDetails");
+                    b.HasIndex(new[] { "ProductId" }, "IX_SupplierProduct_Product");
 
                     b.HasIndex(new[] { "SupplierId" }, "IX_SupplierProduct_SupplierId");
 
@@ -302,7 +306,7 @@ namespace Spareparts.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Spareparts.Domain.Entities.ProductDetails", "ProductDetails")
+                    b.HasOne("Spareparts.Domain.Entities.Product", "Product")
                         .WithMany("CarsProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -310,13 +314,13 @@ namespace Spareparts.Infrastructure.Migrations
 
                     b.Navigation("Car");
 
-                    b.Navigation("ProductDetails");
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Spareparts.Domain.Entities.ProductDetails", b =>
+            modelBuilder.Entity("Spareparts.Domain.Entities.Product", b =>
                 {
                     b.HasOne("Spareparts.Domain.Entities.Category", "Category")
-                        .WithMany("ProductsDetails")
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -326,7 +330,7 @@ namespace Spareparts.Infrastructure.Migrations
 
             modelBuilder.Entity("Spareparts.Domain.Entities.SupplierProduct", b =>
                 {
-                    b.HasOne("Spareparts.Domain.Entities.ProductDetails", "ProductDetails")
+                    b.HasOne("Spareparts.Domain.Entities.Product", "Product")
                         .WithMany("SupplierProdouct")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -338,7 +342,7 @@ namespace Spareparts.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductDetails");
+                    b.Navigation("Product");
 
                     b.Navigation("Supplier");
                 });
@@ -350,7 +354,7 @@ namespace Spareparts.Infrastructure.Migrations
 
             modelBuilder.Entity("Spareparts.Domain.Entities.Category", b =>
                 {
-                    b.Navigation("ProductsDetails");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Spareparts.Domain.Entities.Manufacturer", b =>
@@ -358,7 +362,7 @@ namespace Spareparts.Infrastructure.Migrations
                     b.Navigation("Cars");
                 });
 
-            modelBuilder.Entity("Spareparts.Domain.Entities.ProductDetails", b =>
+            modelBuilder.Entity("Spareparts.Domain.Entities.Product", b =>
                 {
                     b.Navigation("CarsProducts");
 

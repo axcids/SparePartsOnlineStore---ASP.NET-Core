@@ -24,7 +24,7 @@ public interface ICarRepository {
     Task<Car?> UpdateCarById(Guid carId, Car newCar);
 
     // Update car Model
-    Task<Car?> UpdateCarModel(Guid carId, string newModel);
+    Task<Car?> UpdateCarModel(Guid CarId, string newModel);
 
     // Saving Changes 
     Task SaveChanges();
