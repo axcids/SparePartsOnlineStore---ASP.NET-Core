@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using static Spareparts.Domain.Entities.Enums.CarEnums;
+using static Spareparts.SharedKernal.Enums.CarEnums;
 
 namespace Spareparts.Application.Cars.Commands.UpdateCarCommand; 
 public class UpdateCarCommandValidator : AbstractValidator<UpdateCarCommand> {

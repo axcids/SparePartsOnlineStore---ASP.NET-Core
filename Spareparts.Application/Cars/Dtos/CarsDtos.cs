@@ -1,6 +1,5 @@
 ﻿using Spareparts.Domain.Entities;
-using static Spareparts.Domain.Entities.Enums.CarEnums;
-
+using static Spareparts.SharedKernal.Enums.CarEnums;
 
 namespace Spareparts.Application.Cars.Dtos; 
 public class CarsDtos {
@@ -28,6 +27,4 @@ public class CarsDtos {
             FuelType = car.FuelType,
         };
     }
-
-
 }

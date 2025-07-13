@@ -12,6 +12,7 @@ public class ProductRepository(SparepartsDbContext dbContext) : IProductReposito
     }
     public async Task<bool> DeleteProductById(Guid id) {
         var entity = await dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+        if (entity == null) return false;
         var isDeleted = dbContext.Products.Remove(entity);
         if (isDeleted != null) {
             await dbContext.SaveChangesAsync();

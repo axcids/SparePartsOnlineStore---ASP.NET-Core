@@ -1,4 +1,4 @@
-﻿namespace Spareparts.Domain.Entities.Enums; 
+﻿namespace Spareparts.SharedKernal.Enums; 
 public class CarEnums {
 
     public enum BodyStyleEnum {

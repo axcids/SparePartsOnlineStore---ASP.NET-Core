@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Spareparts.Application.Cars.Dtos;
 using Spareparts.Domain.Entities;
 using Spareparts.Domain.Repositories;
-using static Spareparts.Domain.Entities.Enums.CarEnums;
+using static Spareparts.SharedKernal.Enums.CarEnums;
 
 namespace Spareparts.Application.Cars.Commands.UpdateCarCommand;
 public class UpdateCarCommandHandler(ICarRepository carRepository, ILogger<UpdateCarCommandHandler> logger) : IRequestHandler<UpdateCarCommand, CarsDtos> {

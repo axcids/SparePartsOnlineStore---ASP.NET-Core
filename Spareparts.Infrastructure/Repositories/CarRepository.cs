@@ -32,6 +32,7 @@ internal class CarRepository(SparepartsDbContext dbContext) : ICarRepository {
         if (car == null) return null;
         car.Model = newModel;
         dbContext.Cars.Update(car);
+        await dbContext.SaveChangesAsync();
         return car;
     }
     public async Task<Car?> UpdateCarById(Guid carId, Car newCar) {
@@ -45,6 +46,7 @@ internal class CarRepository(SparepartsDbContext dbContext) : ICarRepository {
         car.TransmissionType = newCar.TransmissionType;
         car.FuelType = newCar.FuelType;
         dbContext.Cars.Update(car);
+        await dbContext.SaveChangesAsync();
         return car;
     }
     public async Task<bool> DeleteCarById(Guid carId) {

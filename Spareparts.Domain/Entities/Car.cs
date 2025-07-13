@@ -1,4 +1,4 @@
-﻿using static Spareparts.Domain.Entities.Enums.CarEnums;
+﻿using static Spareparts.SharedKernal.Enums.CarEnums;
 
 namespace Spareparts.Domain.Entities;
 public class Car {

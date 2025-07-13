@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using static Spareparts.Domain.Entities.Enums.CarEnums;
+using static Spareparts.SharedKernal.Enums.CarEnums;
 
 namespace Spareparts.Application.Cars.Commands.CreateCar; 
 public class UpdateCarCommandValidator : AbstractValidator<CreateCarCommand>{
@@ -24,14 +24,14 @@ public class UpdateCarCommandValidator : AbstractValidator<CreateCarCommand>{
         RuleFor(x => x.BodyStyle)
             .NotEmpty().WithMessage("BodyStyle is required.")
             .NotNull().WithMessage("BodyStyle cannot be null")
-            .Must(x => Enum.IsDefined(typeof(BodyStyleEnum), x)).WithMessage("{PropertyName} '{PropertyValue}' is not a valid enum value.");
+            .Must(x => Enum.TryParse(typeof(BodyStyleEnum), x, ignoreCase: true, out _)).WithMessage("{PropertyName} '{PropertyValue}' is not a valid enum value.");
         RuleFor(x => x.TransmissionType)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} cannot be null")
-            .Must(x => Enum.IsDefined(typeof(TransmissionTypeEnum), x)).WithMessage("{PropertyName} '{PropertyValue}' is not a valid enum value.");
+            .Must(x => Enum.TryParse(typeof(TransmissionTypeEnum), x, ignoreCase:true, out _)).WithMessage("{PropertyName} '{PropertyValue}' is not a valid enum value.");
         RuleFor(x => x.FuelType)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} be null")
-            .Must(x => Enum.IsDefined(typeof(FuelTypeEnum), x)).WithMessage("{PropertyName} '{PropertyValue}' is not a valid enum value.");
+            .Must(x => Enum.TryParse(typeof(FuelTypeEnum), x, ignoreCase: true, out _)).WithMessage("{PropertyName} '{PropertyValue}' is not a valid enum value.");
     }
 }
